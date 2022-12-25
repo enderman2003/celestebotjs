@@ -25,6 +25,10 @@ client.on('messageCreate', async msg => {
     if(command === 'regbid'){
         client.commands.get('regbid').execute(msg, args, client);
     };
+    if(command === 'b'){
+        if (!args[1]) return message.reply('Please enter valid amount.');
+        client.commands.get('b').execute(msg, args, client, args[1]);
+    };
 });
 
 client.on('guildMemberAdd', member => {
