@@ -5,9 +5,9 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 client.commands = new Collection();
 const Prefix = "C!"
-const commandFiles = fs.readdirSync('./Components/').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(__dirname+'./Components/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles){
-    const command = require(`./Components/${file}`);
+    const command = require(__dirname+`./Components/${file}`);
     client.commands.set(command.name, command);
 }
   
