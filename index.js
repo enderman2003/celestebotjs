@@ -1,3 +1,10 @@
+const _supabase = require('@supabase/supabase-js')
+const { EmbedBuilder } = require("discord.js")
+const globals = require("./Global/globals")
+const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
+// Create a single supabase client for interacting with your database
+const supabase = _supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 const fs = require('fs');
 const path = require('path');
 const {Client, EmbedBuilder, GatewayIntentBits, Collection } = require("discord.js")
@@ -34,6 +41,7 @@ client.on('guildMemberAdd', member => {
     .from('Gifs')
     .select('url')
     .eq('type', 'WELCOME')
+    if 
     welcomeEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
 	.setTitle('Some title')
