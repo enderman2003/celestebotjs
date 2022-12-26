@@ -22,7 +22,7 @@ client.on('messageCreate', async msg => {
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     let cmd = client.commands.get(command)
-    if(cmd){
+    if (cmd) {
         cmd.execute(msg, args, client)
     }
 });
