@@ -17,7 +17,7 @@ module.exports = {
             registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
-            .setDescription('Bid of ${amount} has been placed successfully by ${message.author.name}')
+            .setDescription('Bid of ${args[1]} has been placed successfully by ${message.author.username}')
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
