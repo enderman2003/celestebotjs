@@ -21,13 +21,9 @@ client.on('messageCreate', async msg => {
 
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-    switch(command){
-        case 'regbid':
-            client.commands.get('regbid').execute(msg, args, client);
-            break;
-        case 'b':
-            if (!args[1]) return msg.reply('Please enter valid amount.');
-            client.commands.get('b').execute(msg, args, client, args[1]);
+    let cmd = client.commands.get(command)
+    if(cmd){
+        cmd.execute(msg, args, client)
     }
 });
 
