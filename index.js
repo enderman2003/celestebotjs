@@ -41,7 +41,9 @@ client.on('guildMemberAdd', member => {
     .from('Gifs')
     .select('url')
     .eq('type', 'WELCOME')
-    if 
+    if (error != null){
+        return true
+    }
     welcomeEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
 	.setTitle('Some title')
@@ -78,14 +80,14 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildMemberRemove', member => {
     goodbyeEmbed = new EmbedBuilder()
-    .setColor(0x0099FF)
+    	.setColor(0x0099FF)
 	.setTitle('Some title')
 	.setDescription(`
 		୨🍡୧ *Goodbye, ` + member.user + ` fellow scholar
 		˚꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
 		I hope that one day you change your mind and come back to our server! 🍧๑ Well, now there's no way to go back... Now we'll have to go on without them! 🍭
 		꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
-    	`)
+	`)
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
