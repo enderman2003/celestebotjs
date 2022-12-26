@@ -17,15 +17,24 @@ module.exports = {
             registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
-            .setDescription('Bid of ${args[0]} has been placed successfully by ${message.author.username}')
+            .setDescription('Bid of' + args[0] + ' has been placed successfully by' + message.author.username)
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
         }
+        else if (args[0] < 0 || args[0] == null){
+            errEmbed = new EmbedBuilder()
+            .setColor(0xFF0000)
+            .setTitle('Forbidden 403')
+            .setDescription('Forbidden 403. Invalid amount input')
+
+            channel = await client.channels.fetch(WAIFU_CHANNEL)
+            channel.send({ embeds: [errEmbed] })
+        }
         else{
             errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
-            .setTitle('Registered Already')
+            .setTitle('Unauthorized 402')
             .setDescription('Unauthorized 402. You aren not allowed to bid')
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
