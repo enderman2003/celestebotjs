@@ -26,7 +26,7 @@ module.exports = {
             errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
             .setTitle('Registered Already')
-            .setDescription('Unauthorized 402. You aren't allowed to bid')
+            .setDescription('Unauthorized 402. You aren not allowed to bid')
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [errEmbed] })
