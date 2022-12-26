@@ -13,6 +13,16 @@ module.exports = {
     async execute(message, args, client) {
         const { data, error } = await supabase.auth.getSession()
         if(error==null && bidderId != message.author.id){
+            if (args[0] < 0 || args[0] == null){
+                errEmbed = new EmbedBuilder()
+                .setColor(0xFF0000)
+                .setTitle('Forbidden 403')
+                .setDescription('Forbidden 403. Invalid amount input')
+
+                channel = await client.channels.fetch(WAIFU_CHANNEL)
+                channel.send({ embeds: [errEmbed] })
+                return true
+            }
             bidderId = message.author.id
             registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
@@ -21,15 +31,6 @@ module.exports = {
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
-        }
-        else if (args[0] < 0 || args[0] == null){
-            errEmbed = new EmbedBuilder()
-            .setColor(0xFF0000)
-            .setTitle('Forbidden 403')
-            .setDescription('Forbidden 403. Invalid amount input')
-
-            channel = await client.channels.fetch(WAIFU_CHANNEL)
-            channel.send({ embeds: [errEmbed] })
         }
         else{
             errEmbed = new EmbedBuilder()
