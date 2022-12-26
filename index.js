@@ -6,7 +6,7 @@ const supabase = _supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 const fs = require('fs');
 const path = require('path');
 const { Client, EmbedBuilder, GatewayIntentBits, Collection, userMention } = require("discord.js")
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 client.commands = new Collection();
 const Prefix = "C!"
