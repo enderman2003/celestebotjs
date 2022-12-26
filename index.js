@@ -5,6 +5,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 client.commands = new Collection();
 const Prefix = "C!"
+const GREET_CHANNEL = "1056425420746141708"
+const LEAVE_CHANNEL = "1056425420746141708"
 const commandFiles = fs.readdirSync(__dirname+'/Components/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles){
     const command = require(__dirname+`/Components/${file}`);
@@ -63,7 +65,7 @@ client.on('guildMemberAdd', member => {
 	.setImage(data[0].url[0])
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
-    client.channels.get(`channelID`).send({ embeds: [welcomeEmbed] })
+    client.channels.get(GREET_CHANNEL).send({ embeds: [welcomeEmbed] })
 });
 
 client.on('guildMemberRemove', member => {
@@ -79,7 +81,7 @@ client.on('guildMemberRemove', member => {
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
-    client.channels.get(`channelID`).send({ embeds: [goodbyeEmbed] })
+    client.channels.get(LEAVE_CHANNEL).send({ embeds: [goodbyeEmbed] })
 });
 
 client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.GoLeSF.aR8HN9iV3-mNaCF6lOu75SUwYxig54Frnjsf9w")
