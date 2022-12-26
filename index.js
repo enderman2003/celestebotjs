@@ -21,14 +21,14 @@ client.on('messageCreate', async msg => {
 
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-
-    if(command === 'regbid'){
-        client.commands.get('regbid').execute(msg, args, client);
-    };
-    if(command === 'b'){
-        if (!args[1]) return msg.reply('Please enter valid amount.');
-        client.commands.get('b').execute(msg, args, client, args[1]);
-    };
+    switch(command){
+        case 'regbid':
+            client.commands.get('regbid').execute(msg, args, client);
+            break;
+        case 'b':
+            if (!args[1]) return msg.reply('Please enter valid amount.');
+            client.commands.get('b').execute(msg, args, client, args[1]);
+    }
 });
 
 client.on('guildMemberAdd', member => {
