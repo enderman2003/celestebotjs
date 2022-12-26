@@ -11,7 +11,7 @@ module.exports = {
     name: "b",
     description: "Bids against other user",
     async execute(message, args, client, amount) {
-        const { data, error } = await supabase.auth.getSession()
+        const { data, error } = await supabase.auth.getSession();
         if(error==null && bidderId != message.author.id){
             bidderId = message.author.id
             registerEmbed = new EmbedBuilder()
@@ -26,7 +26,7 @@ module.exports = {
             errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
             .setTitle('Registered Already')
-            .setDescription('Bid is already placed by you.')
+            .setDescription('Unauthorized')
 
             channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [errEmbed] })
