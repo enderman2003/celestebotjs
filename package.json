@@ -11,8 +11,10 @@
   "author": "WatashiBaka",
   "license": "MIT",
   "dependencies": {
+    "17": "^0.0.0",
     "@supabase/supabase-js": "^2.2.2",
-    "discord.js": "^14.7.1"
+    "discord.js": "^12.2.0",
+    "discord-buttons": "^4.0.0-deprecated"
   },
   "devDependencies": {
     "@architect/sandbox": "^5.4.1",
