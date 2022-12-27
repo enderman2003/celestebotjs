@@ -1,4 +1,5 @@
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, ButtonStyle} from "discord.js"
+import { MessageEmbed } from "discord.js"
+import { MessageActionRow, MessageButton } from 'discord-buttons'
 import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
@@ -7,11 +8,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
 
 export async function regbid(message, args, client) {
-    const button = new ActionRowBuilder()
+    const button = new MessageActionRow()
             .addComponents(
-                new ButtonBuilder()
+                new MessageButton()
                     .setLabel('SignIn')
-                    .setStyle(ButtonStyle.Link)
+                    .setStyle('url')
                     .setURL("https://dxflwfledezyinanacmg.supabase.co/auth/v1/authorize?provider=discord")
     );
     channel = await client.channels.fetch(WAIFU_CHANNEL)
@@ -27,7 +28,7 @@ export async function regbid(message, args, client) {
         .insert({ dis_id: message.author.id, amt: 500})
         console.log(error)
         if (error==null){
-            registerEmbed = new EmbedBuilder()
+            registerEmbed = new MessageEmbed()
             .setColor(0x0099FF)
             .setTitle('Registered Successfully')
             .setDescription('Your base data have been successfully registered. As reward we have transferred 200 :coin: to your acoount. In order to bid you need to press the above button. Enjoy!')
@@ -37,7 +38,7 @@ export async function regbid(message, args, client) {
         }
     }
     else{
-        errEmbed = new EmbedBuilder()
+        errEmbed = new MessageEmbed()
         .setColor(0x0099FF)
         .setTitle('Registered Already')
         .setDescription('Your base data have been already registered. In order to bid you need to press the above button.')
