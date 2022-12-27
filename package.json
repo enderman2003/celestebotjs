@@ -2,10 +2,11 @@
   "name": "celesbot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./index.js",
+  "type": "module",
   "scripts": {
-    "build": "npm install",
-    "start": "node index.js"
+    "cloud:build": "npm install",
+    "cloud:start": "node ./index.js"
   },
   "author": "WatashiBaka",
   "license": "MIT",
@@ -14,6 +15,11 @@
     "discord.js": "^14.7.1"
   },
   "devDependencies": {
-    "@architect/sandbox": "^5.4.1"
+    "@architect/sandbox": "^5.4.1",
+    "@types/node": "^18.11.18"
+  },
+  "serverless": {
+    "app": "celesbot",
+    "org": "firstgames"
   }
 }

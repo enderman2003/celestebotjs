@@ -1,22 +1,16 @@
-const _supabase = require('@supabase/supabase-js')
+import { regbid } from './Components/regbid.js'
+import { b } from './Components/b.js'
+import { createClient } from '@supabase/supabase-js'
+import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
 // Create a single supabase client for interacting with your database
-const supabase = _supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-const fs = require('fs');
-const path = require('path');
-const { Client, EmbedBuilder, GatewayIntentBits, Collection, userMention } = require("discord.js")
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-client.commands = new Collection();
 const Prefix = "C!"
 const GREET_CHANNEL = "1056425420746141708"
 const LEAVE_CHANNEL = "1056425420746141708"
-const commandFiles = fs.readdirSync(__dirname+'/Components/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-    const command = require(__dirname+`/Components/${file}`);
-    client.commands.set(command.name, command);
-}
   
 
 client.on("ready", () => {
@@ -28,9 +22,13 @@ client.on('messageCreate', async msg => {
 
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-    let cmd = client.commands.get(command)
-    if (cmd) {
-        cmd.execute(msg, args, client)
+    switch (command) {
+        case "regibid":
+            regbid(msg, args, client)
+            break;
+        case "b":
+            b(msg, args, client)
+            break;
     }
 });
 
@@ -82,7 +80,7 @@ client.on('guildMemberRemove', async member => {
 	const { data, error } = await supabase
     .from('Gifs')
     .select('url')
-    .eq('type', 'LEAVE')
+    .eq('type', 'WELCOME')
     if (error != null){
         return true
     }
@@ -95,7 +93,7 @@ client.on('guildMemberRemove', async member => {
 I hope that one day you change your mind and come back to our server! 🍧๑ Well, now there's no way to go back... Now we'll have to go on without them! 🍭
 ꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
     	`)
-	.setImage(data[0].url[0])
+	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setFooter({ text: member.user.id });
 
     channel = await client.channels.fetch(LEAVE_CHANNEL)
