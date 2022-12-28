@@ -102,4 +102,4 @@ I hope that one day you change your mind and come back to our server! 🍧๑ We
 	channel.send({ embeds: [welcomeEmbed] })
 });
 
-client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.GoLeSF.aR8HN9iV3-mNaCF6lOu75SUwYxig54Frnjsf9w")
+client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.Giw_LQ.YVY9XwV_RylVqK8ZLfe6kI0doRZ90P9HCg6-PE")
