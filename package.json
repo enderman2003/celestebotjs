@@ -5,8 +5,8 @@
   "main": "./index.js",
   "type": "module",
   "scripts": {
-    "cloud:build": "npm install",
-    "cloud:start": "node ./index.js"
+    "build": "npm install",
+    "start": "node ./index.js"
   },
   "author": "WatashiBaka",
   "license": "MIT",
