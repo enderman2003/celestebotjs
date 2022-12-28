@@ -29,6 +29,8 @@ client.on('messageCreate', async msg => {
         case "b":
             b(msg, args, client)
             break;
+	default:	   
+	    break;    
     }
 });
 
