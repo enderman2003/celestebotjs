@@ -4,5 +4,5 @@ WORKDIR ./bot
 
 COPY ./ ./bot/
 
-RUN npm run build
+RUN npm install
 CMD npm run start
