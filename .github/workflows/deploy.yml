@@ -19,4 +19,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "celestebot"
-          entrypoint: "./index.js" # TODO: update entrypoint
+          entrypoint: "./package.json" # TODO: update entrypoint
