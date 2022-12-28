@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js"
+import { EmbedBuilder } from "discord.js"
 import { get_globals } from "../Global/globals.js"
 import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
@@ -13,7 +13,7 @@ export async function b(message, args, client) {
         const { data, error } = await supabase.auth.getSession()
         if(error==null && bidderId != message.author.id){
             if (args[0] < 0 || args[0] == null){
-                errEmbed = new MessageEmbed()
+                var errEmbed = new EmbedBuilder()
                 .setColor(0xFF0000)
                 .setTitle('Forbidden 403')
                 .setDescription('Forbidden 403. Invalid amount input')
@@ -23,21 +23,21 @@ export async function b(message, args, client) {
                 return true
             }
             bidderId = message.author.id
-            registerEmbed = new MessageEmbed()
+            var registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
             .setDescription('Bid of ' + args[0] + ' has been placed successfully by ' + message.author.username)
 
-            channel = await client.channels.fetch(WAIFU_CHANNEL)
+            var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
         }
         else{
-            errEmbed = new MessageEmbed()
+            var errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
             .setTitle('Unauthorized 402')
             .setDescription('Unauthorized 402. You aren not allowed to bid')
 
-            channel = await client.channels.fetch(WAIFU_CHANNEL)
+            var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [errEmbed] })
         }
     }

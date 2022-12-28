@@ -1,12 +1,12 @@
 import { regbid } from './Components/regbid.js'
 import { b } from './Components/b.js'
 import { createClient } from '@supabase/supabase-js'
-import { Client, MessageEmbed } from "discord.js"
+import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "MESSAGE_CONTENT"] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 const Prefix = "C!"
 const GREET_CHANNEL = "1056425420746141708"
@@ -23,7 +23,7 @@ client.on('messageCreate', async msg => {
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     switch (command) {
-        case "regibid":
+        case "regbid":
             regbid(msg, args, client)
             break;
         case "b":
@@ -41,12 +41,12 @@ client.on('guildMemberAdd', async member => {
         return true
     }
 	console.log(data)
-    welcomeEmbed = new MessageEmbed()
+    var welcomeEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
 	.setTitle('WELCOME')
 	.setDescription(`
 ˏˋ°•⁀➷
-୨୧ <@${member.user.id}> Welcome new Owl🎐
+୨୧ ` + userMention(member.user.id) + ` Welcome new Owl🎐
 *・✦ ⊹₊꒷˚૮₍｡• – •｡₎ა˚ ꒷꒦
 ʚ🍧:Please read the rules‹3
 ⊹₊꒷︶︶꒷︶︶꒷꒦︶︶꒦‧🌸
@@ -72,7 +72,7 @@ which you can find underneath the rules !!!* ୨ 🍣
 	.setImage(data[0].url[0])
 	.setFooter({ text: member.user.username });
 
-    channel = await client.channels.fetch(GREET_CHANNEL)
+    var channel = await client.channels.fetch(GREET_CHANNEL)
 	channel.send({ embeds: [welcomeEmbed] })
 });
 
@@ -84,11 +84,11 @@ client.on('guildMemberRemove', async member => {
     if (error != null){
         return true
     }
-    goodbyeEmbed = new MessageEmbed()
+    var goodbyeEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
 	.setTitle('SAYONARA')
 	.setDescription(`
-୨🍡୧ *Goodbye, <@${member.user.id}> fellow scholar
+୨🍡୧ *Goodbye, ` + userMention(member.user.id) + ` fellow scholar
 ˚꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
 I hope that one day you change your mind and come back to our server! 🍧๑ Well, now there's no way to go back... Now we'll have to go on without them! 🍭
 ꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
@@ -96,7 +96,7 @@ I hope that one day you change your mind and come back to our server! 🍧๑ We
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setFooter({ text: member.user.id });
 
-    channel = await client.channels.fetch(LEAVE_CHANNEL)
+    var channel = await client.channels.fetch(LEAVE_CHANNEL)
 	channel.send({ embeds: [welcomeEmbed] })
 });
 
