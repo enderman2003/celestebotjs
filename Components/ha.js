@@ -49,6 +49,7 @@ export async function ha(message, client) {
       
       var channel = await client.channels.fetch(WAIFU_CHANNEL)
       channel.send({ embeds: [expireEmbed] })
+    }
   }
   else {
       var errEmbed = new EmbedBuilder()
