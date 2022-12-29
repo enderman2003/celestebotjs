@@ -49,14 +49,20 @@ export function set_globals(global, value) {
     return true;
 };
 
-async function bidWon(client) {
+async function bidWon(message, client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
+    const { data, error } = await supabase
+    .from('Discord minigame')
+    .select('amt')
+    .eq('dis_id', message.author.id)
+    console.log(data)
+    var amount = data[0].amt - get_globals('bidAmt')
     const { dat, err } = await supabase
     .from('Discord minigame')
-    .update({ 'claimed_waifus': [get_globals('imgHash')] })
+    .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
     var wonEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Bid Won')
@@ -80,7 +86,9 @@ async function bidExpired(client) {
     .setColor(0x0099FF)
     .setTitle('Auction Expired')
     .setDescription("The above has expired. Good luck next time")
-      
+
+    set_globals('imgHash', '')
+
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [expireEmbed] })
 }
