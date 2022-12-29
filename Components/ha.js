@@ -40,16 +40,7 @@ export async function ha(message, client) {
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [auctionEmbed] })
     
-    auction_timer()
-    if (get_globals('bidExpired') === true) {
-      var expireEmbed = new EmbedBuilder()
-      .setColor(0x0099FF)
-      .setTitle('Auction Expired')
-      .setDescription("The above has expired. Good luck next time")
-      
-      var channel = await client.channels.fetch(WAIFU_CHANNEL)
-      channel.send({ embeds: [expireEmbed] })
-    }
+    auction_timer(client)
   }
   else {
       var errEmbed = new EmbedBuilder()
