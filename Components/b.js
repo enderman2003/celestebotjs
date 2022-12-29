@@ -30,7 +30,8 @@ export async function b(message, args, client) {
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
             bid_timer(client)
-        else{
+        }
+        else {
             var errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
             .setTitle('Unauthorized 402')
