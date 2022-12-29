@@ -11,7 +11,7 @@ var j = 0
 export async function ha(message, client) {
   const { data, error } = await supabase.auth.getSession()
   if(error==null) { 
-    set_globals('auctionProcess', true)
+    set_globals('auctionProcess', 'true')
     const { dat, err} = await supabase
     .from('Discord minigame')
     .select('claimed_waifus')
