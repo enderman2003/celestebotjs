@@ -18,10 +18,10 @@ export async function ha(message, client) {
     .storage
     .from('animenft')
     .list()
-    for (claim_file in dat) {
+    for (const i of dat) {
       if (data.name != claim_file) {
-        set_globals('imgHash', claimfile)
-        console.log(claim_file)
+        set_globals('imgHash', i)
+        console.log(i)
         break;
       }
     }
