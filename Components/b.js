@@ -22,7 +22,7 @@ export async function b(message, args, client) {
                 return true
             }
             set_globals('bidderId', message.author.id)
-            set_globals('bidAmt', parseInt(args[0]))
+            set_globals('bidAmt', args[0])
             var registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
