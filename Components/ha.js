@@ -23,8 +23,8 @@ export async function ha(message, client) {
     if (dat != null) {
       for (const i of dat) {
         if (data[j].name != i) {
-          set_globals('imgHash', i)
-          console.log(i)
+          set_globals('imgHash', data[j].name)
+          console.log(data[j].name)
           break;
         }
         j++
