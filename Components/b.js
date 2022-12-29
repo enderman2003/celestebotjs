@@ -29,28 +29,7 @@ export async function b(message, args, client) {
 
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
-            bid_timer()
-            while(get_globals('bidWon') != 'true') {
-                if (get_globals('bidWon') === 'true') {
-                    const { dat, err } = await supabase
-                    .from('Discord minigame')
-                    .update({ 'claimed_waifus': [get_globals('imgHash')] })
-                    var wonEmbed = new EmbedBuilder()
-                    .setColor(0x0099FF)
-                    .setTitle('Bid Won')
-                    .setDescription(`Congratulations for winning the bid \n ${get_globals('bidAmt')} :coin: has been deducted successfully` + message.author.username)
-                    .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
-                    .setFooter({ text: message.author.username });
-
-                    set_globals('imgHash', '')
-
-                    var channel = await client.channels.fetch(WAIFU_CHANNEL)
-                    channel.send({ embeds: [wonEmbed] })
-                    break;
-               }
-            }            
-            set_globals('bidWon', 'false')
-        }
+            bid_timer(client)
         else{
             var errEmbed = new EmbedBuilder()
             .setColor(0xFF0000)
