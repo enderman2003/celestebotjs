@@ -31,7 +31,7 @@ export async function b(message, args, client) {
             channel.send({ embeds: [registerEmbed] })
             bid_timer()
             
-            if (get_globals('bidWon') === true) {
+            if (get_globals('bidWon') === 'true') {
                 const { dat, err } = await supabase
                 .from('Discord minigame')
                 .update({ 'claimed_waifus': [get_globals('imgHash')] })
