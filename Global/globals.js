@@ -31,6 +31,7 @@ const globals = {
 }
 
 var timer;
+var atimer;
 export function get_globals(global) {
 // return variable or false if not exists
     return globals[global] && globals[global].value ? globals[global].value : false;
@@ -44,19 +45,6 @@ export function set_globals(global, value) {
     globals[global] = { value: value };
     return true;
 };
-
-class Timer {
-  constructor(timeout, callBack) {
-     this.timeout = timeout
-     this.callBack = callBack()
-  }
-  timer_start() {
-     timer = setTimeout(this.callBack, this.timeout * 1000)
-  }
-  timer_end() {
-     clearTimeout(this.timeout);
-  }
-}
 
 function bidWon() {
     set_globals('auctionProcess', false)
@@ -74,6 +62,8 @@ function bidExpired() {
     set_globals('bidExpired', true)
 }
 
-export var auction_timer = new Timer(get_globals('AuctionTimeout'), bidExpired)
-export var bid_timer = new Timer(get_globals('timeoutSec'), bidWon)
+export function auction_timer() { atimer = setTimeout(get_globals('AuctionTimeout'), bidExpired) }
+export function bid_timer() { timer = setTimeout('timeoutSec'), bidWon) }
+export function auction_timer_end() { clearTimeout(atimer) }
+export function bid_timer_end() { clearTimeout(timer) }
   
