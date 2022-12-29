@@ -32,4 +32,5 @@ const globals = {
      globals['bidderId'] = 0
      globals['bidAmt'] = 0
      globals['hostId'] = 0
+     return true
   }
