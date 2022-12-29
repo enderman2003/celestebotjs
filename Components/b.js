@@ -22,6 +22,7 @@ export async function b(message, args, client) {
                 return true
             }
             set_globals('bidderId', message.author.id)
+            set_globals('bidAmt', args[0])
             var registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
@@ -29,7 +30,7 @@ export async function b(message, args, client) {
 
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
-            bid_timer(client)
+            bid_timer(message, client)
         }
         else {
             var errEmbed = new EmbedBuilder()
