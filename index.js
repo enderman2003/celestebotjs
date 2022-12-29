@@ -79,10 +79,10 @@ which you can find underneath the rules !!!* ୨ 🍣
 });
 
 client.on('guildMemberRemove', async member => {
-	const { data, error } = await supabase
+    const { data, error } = await supabase
     .from('Gifs')
     .select('url')
-    .eq('type', 'WELCOME')
+    .eq('type', 'LEAVE')
     if (error != null){
         return true
     }
@@ -95,8 +95,8 @@ client.on('guildMemberRemove', async member => {
 I hope that one day you change your mind and come back to our server! 🍧๑ Well, now there's no way to go back... Now we'll have to go on without them! 🍭
 ꒷꒷︶₊˚૮₍｡• – •｡₎ა˚₊︶꒷꒷˚
     	`)
-	.setImage('https://i.imgur.com/AfFp7pu.png')
-	.setFooter({ text: member.user.id });
+	.setImage(data[0].url[0])
+	.setFooter({ text: member.user.username });
 
     var channel = await client.channels.fetch(LEAVE_CHANNEL)
 	channel.send({ embeds: [goodbyeEmbed] })
