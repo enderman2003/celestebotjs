@@ -66,7 +66,7 @@ async function bidWon(message, client) {
     var wonEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Bid Won')
-    .setDescription(`Congratulations for winning the bid \n ${get_globals('bidAmt')} :coin: has been deducted successfully` + message.author.username)
+    .setDescription(`Congratulations for winning the bid ${message.author.username}. \n ${get_globals('bidAmt')} :coin: has been deducted successfully`)
     .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
     .setFooter({ text: message.author.username });
 
