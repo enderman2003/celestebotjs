@@ -6,6 +6,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
+var j = 0
 
 export async function ha(message, client) {
   const { data, error } = await supabase.auth.getSession()
@@ -19,11 +20,12 @@ export async function ha(message, client) {
     .from('animenft')
     .list()
     for (const i of dat) {
-      if (data.name != claim_file) {
+      if (data[j].name != i) {
         set_globals('imgHash', i)
         console.log(i)
         break;
       }
+      j++
     }
     var auctionEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
