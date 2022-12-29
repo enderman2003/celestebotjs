@@ -1,8 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
 import { createClient } from '@supabase/supabase-js'
 
-
+const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
+// Create a single supabase client for interacting with your database
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
+
 const globals = {
     imgHash: {
         value: ''
@@ -45,7 +49,7 @@ export function set_globals(global, value) {
     return true;
 };
 
-function bidWon(client) {
+async function bidWon(client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
@@ -67,7 +71,7 @@ function bidWon(client) {
     
 }
 
-function bidExpired(client) {
+async function bidExpired(client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
@@ -81,8 +85,8 @@ function bidExpired(client) {
     channel.send({ embeds: [expireEmbed] })
 }
 
-export function auction_timer(client) { atimer = setTimeout(function() {bidExpired(client)}, get_globals('auctionTimeout') * 1000) }
-export function bid_timer(client) { timer = setTimeout(function() {bidWon(client)}, get_globals('timeoutSec') * 1000) }
+export function auction_timer(client) { atimer = setTimeout(async function() {await bidExpired(client)}, get_globals('auctionTimeout') * 1000) }
+export function bid_timer(client) { timer = setTimeout(async function() {await bidWon(client)}, get_globals('timeoutSec') * 1000) }
 export function auction_timer_end() { clearTimeout(atimer) }
 export function bid_timer_end() { clearTimeout(timer) }
   
