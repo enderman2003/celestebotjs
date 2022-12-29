@@ -34,7 +34,7 @@ export async function ha(message, client) {
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [auctionEmbed] })
     
-    auction_timer.timer_start()
+    auction_timer()
   }
   else {
       var errEmbed = new EmbedBuilder()
