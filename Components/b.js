@@ -8,7 +8,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
 
 export async function b(message, args, client) {
-    if (get_globals("auctionProcess") === true) {
+    if (get_globals("auctionProcess") === 'true') {
         const { data, error } = await supabase.auth.getSession()
         if(error==null && get_globals("bidderId") != message.author.id){
             if (args[0] < 0 || args[0] == null){
