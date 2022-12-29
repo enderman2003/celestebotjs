@@ -99,7 +99,7 @@ I hope that one day you change your mind and come back to our server! 🍧๑ We
 	.setFooter({ text: member.user.id });
 
     var channel = await client.channels.fetch(LEAVE_CHANNEL)
-	channel.send({ embeds: [welcomeEmbed] })
+	channel.send({ embeds: [goodbyeEmbed] })
 });
 
 client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.Giw_LQ.YVY9XwV_RylVqK8ZLfe6kI0doRZ90P9HCg6-PE")
