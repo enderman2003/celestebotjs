@@ -27,7 +27,7 @@ const globals = {
     return true;
   };
   
-  export function bid_expired(msg, image, client) {
+  export function bid_expired() {
      globals['auctionProcess'] = false
      globals['bidderId'] = 0
      globals['bidAmt'] = 0
