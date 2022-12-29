@@ -49,14 +49,24 @@ class Timer {
   }
 }
 
-class bidAllType {
-  constructor() {
-     set_globals('auctionProcess', false)
-     set_globals('bidderId', 0)
-     set_globals('bidAmt', 0)
-     set_globals('hostId', 0)
+function bidWon() {
+    set_globals('auctionProcess', false)
+    set_globals('bidderId', 0)
+    set_globals('bidAmt', 0)
+    set_globals('hostId', 0)
 
-     return true
-  }
+    return true
 }
+
+function bidExpired() {
+    set_globals('auctionProcess', false)
+    set_globals('bidderId', 0)
+    set_globals('bidAmt', 0)
+    set_globals('hostId', 0)
+
+    return true
+}
+
+export var auction_timer = new Timer(get_globals('AuctionTimeout'), bidExpired)
+export var bid_timer = new Timer(get_globals('timeoutSec'), bidWon)
   
