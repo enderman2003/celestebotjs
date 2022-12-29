@@ -1,4 +1,7 @@
 const globals = {
+    imgHash: {
+        value: ''
+    },
     bidWon: {
         value: false
     },
