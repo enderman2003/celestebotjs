@@ -1,7 +1,9 @@
 import { regbid } from './Components/regbid.js'
 import { b } from './Components/b.js'
+import { ha } from './Components/ha.js'
+
 import { createClient } from '@supabase/supabase-js'
-import { bid_timer } from "./Global/globals.js"
+import { bid_timer, auction_timer } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
@@ -29,8 +31,12 @@ client.on('messageCreate', async msg => {
             break;
         case "b":
             bid_timer.timer_end()
+	    auction_timer.timer_end()
             b(msg, args, client)
             break;
+	case "ha":
+	    ha(msg, client)
+	    break;
 	default:	   
 	    break;    
     }
