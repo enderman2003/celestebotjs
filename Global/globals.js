@@ -2,10 +2,13 @@ const globals = {
     auctionProcess: {
       value: false
     },
-    bid_amt: {
+    bidAmt: {
+      value: 0
+    },  
+    hostId: {
       value: 0
     },
-    hostId: {
+    bidderId: {
       value: 0
     },
   }
@@ -23,3 +26,10 @@ const globals = {
     globals[global] = { value: value };
     return true;
   };
+  
+  export function bid_expired(msg, image, client) {
+     globals['auctionProcess'] = false
+     globals['bidderId'] = 0
+     globals['bidAmt'] = 0
+     globals['hostId'] = 0
+  }
