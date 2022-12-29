@@ -1,3 +1,5 @@
+import { EmbedBuilder } from 'discord.js';
+
 const globals = {
     imgHash: {
         value: ''
@@ -46,12 +48,26 @@ export function set_globals(global, value) {
     return true;
 };
 
-function bidWon() {
+function bidWon(client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-    set_globals('bidWon', 'true')
+    const { dat, err } = await supabase
+    .from('Discord minigame')
+    .update({ 'claimed_waifus': [get_globals('imgHash')] })
+    var wonEmbed = new EmbedBuilder()
+    .setColor(0x0099FF)
+    .setTitle('Bid Won')
+    .setDescription(`Congratulations for winning the bid \n ${get_globals('bidAmt')} :coin: has been deducted successfully` + message.author.username)
+    .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
+    .setFooter({ text: message.author.username });
+
+    set_globals('imgHash', '')
+
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [wonEmbed] })
+    
 }
 
 function bidExpired() {
@@ -63,7 +79,7 @@ function bidExpired() {
 }
 
 export function auction_timer() { atimer = setTimeout(function() {bidExpired()}, get_globals('auctionTimeout') * 1000) }
-export function bid_timer() { timer = setTimeout(function() {bidWon()}, get_globals('timeoutSec') * 1000) }
+export function bid_timer(client) { timer = setTimeout(function() {bidWon(client)}, get_globals('timeoutSec') * 1000) }
 export function auction_timer_end() { clearTimeout(atimer) }
 export function bid_timer_end() { clearTimeout(timer) }
   
