@@ -1,4 +1,10 @@
 const globals = {
+    bidWon: {
+        value: false
+    },
+    bidExpired: {
+        value: false
+    },
     auctionProcess: {
         value: false
     },
@@ -54,8 +60,7 @@ function bidWon() {
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-
-    return true
+    set_globals('bidWon', true)
 }
 
 function bidExpired() {
@@ -63,8 +68,7 @@ function bidExpired() {
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-
-    return true
+    set_globals('bidExpired', true)
 }
 
 export var auction_timer = new Timer(get_globals('AuctionTimeout'), bidExpired)
