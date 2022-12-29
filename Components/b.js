@@ -46,6 +46,7 @@ export async function b(message, args, client) {
                 
                 var channel = await client.channels.fetch(WAIFU_CHANNEL)
                 channel.send({ embeds: [wonEmbed] })
+            }
         }
         else{
             var errEmbed = new EmbedBuilder()
