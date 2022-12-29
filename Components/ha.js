@@ -30,6 +30,7 @@ export async function ha(message, client) {
       }
     }
     else { set_globals('imgHash', data[Math.random() * data.length]) }
+    console.log(get_globals('imgHash'))
     var auctionEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Auction Started')
