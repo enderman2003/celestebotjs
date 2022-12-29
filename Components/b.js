@@ -25,28 +25,29 @@ export async function b(message, args, client) {
             var registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
-            .setDescription('Bid of ' + args[0] + ' has been placed successfully by ' + message.author.username)
+            .setDescription('Bid of ' + args[0] + ' :coin: has been placed successfully by ' + message.author.username)
 
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
             bid_timer()
-            
-            if (get_globals('bidWon') === 'true') {
-                const { dat, err } = await supabase
-                .from('Discord minigame')
-                .update({ 'claimed_waifus': [get_globals('imgHash')] })
-                var wonEmbed = new EmbedBuilder()
-                .setColor(0x0099FF)
-                .setTitle('Bid Won')
-                .setDescription(`Congratulations for winning the bid \n ${get_globals('bidAmt')} :coin: has been deducted successfully` + message.author.username)
-                .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
-                .setFooter({ text: message.author.username });
-                
-                set_globals('imgHash', '')
-                
-                var channel = await client.channels.fetch(WAIFU_CHANNEL)
-                channel.send({ embeds: [wonEmbed] })
-            }
+            while(get_globals('bidWon') === 'false') {
+                if (get_globals('bidWon') === 'true') {
+                    const { dat, err } = await supabase
+                    .from('Discord minigame')
+                    .update({ 'claimed_waifus': [get_globals('imgHash')] })
+                    var wonEmbed = new EmbedBuilder()
+                    .setColor(0x0099FF)
+                    .setTitle('Bid Won')
+                    .setDescription(`Congratulations for winning the bid \n ${get_globals('bidAmt')} :coin: has been deducted successfully` + message.author.username)
+                    .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
+                    .setFooter({ text: message.author.username });
+
+                    set_globals('imgHash', '')
+
+                    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+                    channel.send({ embeds: [wonEmbed] })
+               }
+          }
         }
         else{
             var errEmbed = new EmbedBuilder()
