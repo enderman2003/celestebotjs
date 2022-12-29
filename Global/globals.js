@@ -94,7 +94,7 @@ async function bidExpired(client) {
 }
 
 export function auction_timer(client) { atimer = setTimeout(async function() {await bidExpired(client)}, get_globals('auctionTimeout') * 1000) }
-export function bid_timer(client) { timer = setTimeout(async function() {await bidWon(client)}, get_globals('timeoutSec') * 1000) }
+export function bid_timer(message, client) { timer = setTimeout(async function() {await bidWon(message, client)}, get_globals('timeoutSec') * 1000) }
 export function auction_timer_end() { clearTimeout(atimer) }
 export function bid_timer_end() { clearTimeout(timer) }
   
