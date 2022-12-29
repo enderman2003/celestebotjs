@@ -30,7 +30,7 @@ export async function b(message, args, client) {
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
             bid_timer()
-            while(get_globals('bidWon') === 'false') {
+            while(get_globals('bidWon') != 'true') {
                 if (get_globals('bidWon') === 'true') {
                     const { dat, err } = await supabase
                     .from('Discord minigame')
