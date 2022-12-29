@@ -29,7 +29,7 @@ export async function b(message, args, client) {
 
             var channel = await client.channels.fetch(WAIFU_CHANNEL)
             channel.send({ embeds: [registerEmbed] })
-            bid_timer
+            bid_timer()
             
             if (get_globals('bidWon') === true) {
                 const { dat, err } = await supabase
