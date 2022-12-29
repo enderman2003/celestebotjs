@@ -11,6 +11,9 @@ const globals = {
     bidderId: {
       value: 0
     },
+    timeoutSec: {
+      value: 25
+    },
   }
   
   export function get_globals(global) {
