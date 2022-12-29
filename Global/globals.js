@@ -15,7 +15,7 @@ const globals = {
         value: 'false'
     },
     bidAmt: {
-        value: ''
+        value: 0
     },  
     hostId: {
         value: 0
@@ -50,10 +50,6 @@ export function set_globals(global, value) {
 };
 
 async function bidWon(message, client) {
-    set_globals('auctionProcess', 'false')
-    set_globals('bidderId', 0)
-    set_globals('bidAmt', 0)
-    set_globals('hostId', 0)
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('amt')
@@ -74,14 +70,13 @@ async function bidWon(message, client) {
 
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [wonEmbed] })
-    
-}
-
-async function bidExpired(client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
+}
+
+async function bidExpired(client) {
     var expireEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Auction Expired')
@@ -91,6 +86,10 @@ async function bidExpired(client) {
 
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [expireEmbed] })
+    set_globals('auctionProcess', 'false')
+    set_globals('bidderId', 0)
+    set_globals('bidAmt', 0)
+    set_globals('hostId', 0)
 }
 
 export function auction_timer(client) { atimer = setTimeout(async function() {await bidExpired(client)}, get_globals('auctionTimeout') * 1000) }
