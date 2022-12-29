@@ -30,8 +30,8 @@ client.on('messageCreate', async msg => {
             regbid(msg, args, client)
             break;
         case "b":
-            bid_timer.timer_end()
-	    auction_timer.timer_end()
+            bid_timer_end()
+	    auction_timer_end()
             b(msg, args, client)
             break;
 	case "ha":
