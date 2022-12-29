@@ -20,6 +20,7 @@ export async function ha(message, client) {
     .from('animenft')
     .list()
     console.log(dat)
+    console.log(data)
     if (dat != null) {
       for (const i of dat) {
         if (data[j].name != i) {
