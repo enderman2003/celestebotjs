@@ -1,5 +1,3 @@
-import { regbid } from './Components/regbid.js'
-import { b } from './Components/b.js'
 import { createClient } from '@supabase/supabase-js'
 import { get_globals, set_globals, auction_timer } from "../Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
