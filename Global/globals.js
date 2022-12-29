@@ -3,13 +3,13 @@ const globals = {
         value: ''
     },
     bidWon: {
-        value: false
+        value: 'false'
     },
     bidExpired: {
-        value: false
+        value: 'false'
     },
     auctionProcess: {
-        value: false
+        value: 'false'
     },
     bidAmt: {
         value: 0
@@ -47,19 +47,19 @@ export function set_globals(global, value) {
 };
 
 function bidWon() {
-    set_globals('auctionProcess', false)
+    set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-    set_globals('bidWon', true)
+    set_globals('bidWon', 'true')
 }
 
 function bidExpired() {
-    set_globals('auctionProcess', false)
+    set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-    set_globals('bidExpired', true)
+    set_globals('bidExpired', 'true')
 }
 
 export function auction_timer() { atimer = setTimeout(function() {bidExpired()}, get_globals('auctionTimeout') * 1000) }
