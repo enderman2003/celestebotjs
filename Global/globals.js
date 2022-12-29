@@ -1,4 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
+import { createClient } from '@supabase/supabase-js'
+
 
 const WAIFU_CHANNEL = "1056425420746141708"
 const globals = {
