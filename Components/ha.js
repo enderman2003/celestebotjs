@@ -19,11 +19,9 @@ export async function ha(message, client) {
     .storage
     .from('animenft')
     .list()
-    console.log(dat)
-    console.log(data)
     if (dat != null) {
-      for (const i of dat) {
-        if (data[j].name != i) {
+      for (const i of data) {
+        if (data[j].name != i[j]) {
           set_globals('imgHash', data[j].name)
           console.log(data[j].name)
           break;
@@ -31,6 +29,7 @@ export async function ha(message, client) {
         j++
       }
     }
+    else { data[Math.random() * data.length] }
     var auctionEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Auction Started')
