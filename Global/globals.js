@@ -1,5 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
 
+const WAIFU_CHANNEL = "1056425420746141708"
 const globals = {
     imgHash: {
         value: ''
