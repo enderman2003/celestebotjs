@@ -1,5 +1,5 @@
 import { EmbedBuilder } from "discord.js"
-import { get_globals } from "../Global/globals.js"
+import { get_globals, set_globals, bid_expired } from "../Global/globals.js"
 import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
@@ -11,7 +11,7 @@ var bidderId = 0
 export async function b(message, args, client) {
     if (get_globals("auctionProcess") === true) {
         const { data, error } = await supabase.auth.getSession()
-        if(error==null && bidderId != message.author.id){
+        if(error==null && get_globals("bidderId") != message.author.id){
             if (args[0] < 0 || args[0] == null){
                 var errEmbed = new EmbedBuilder()
                 .setColor(0xFF0000)
@@ -22,7 +22,7 @@ export async function b(message, args, client) {
                 channel.send({ embeds: [errEmbed] })
                 return true
             }
-            bidderId = message.author.id
+            set_globals('bidderId', message.author.id)
             var registerEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Bid Placed Successfully')
