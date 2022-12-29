@@ -63,7 +63,7 @@ function bidExpired() {
 }
 
 export function auction_timer() { atimer = setTimeout(get_globals('AuctionTimeout'), bidExpired) }
-export function bid_timer() { timer = setTimeout('timeoutSec'), bidWon) }
+export function bid_timer() { timer = setTimeout(get_globals('timeoutSec'), bidWon) }
 export function auction_timer_end() { clearTimeout(atimer) }
 export function bid_timer_end() { clearTimeout(timer) }
   
