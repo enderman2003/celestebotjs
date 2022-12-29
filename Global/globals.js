@@ -4,12 +4,6 @@ const globals = {
     imgHash: {
         value: ''
     },
-    bidWon: {
-        value: 'false'
-    },
-    bidExpired: {
-        value: 'false'
-    },
     auctionProcess: {
         value: 'false'
     },
@@ -70,15 +64,21 @@ function bidWon(client) {
     
 }
 
-function bidExpired() {
+function bidExpired(client) {
     set_globals('auctionProcess', 'false')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
-    set_globals('bidExpired', 'true')
+    var expireEmbed = new EmbedBuilder()
+    .setColor(0x0099FF)
+    .setTitle('Auction Expired')
+    .setDescription("The above has expired. Good luck next time")
+      
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [expireEmbed] })
 }
 
-export function auction_timer() { atimer = setTimeout(function() {bidExpired()}, get_globals('auctionTimeout') * 1000) }
+export function auction_timer(client) { atimer = setTimeout(function() {bidExpired(client)}, get_globals('auctionTimeout') * 1000) }
 export function bid_timer(client) { timer = setTimeout(function() {bidWon(client)}, get_globals('timeoutSec') * 1000) }
 export function auction_timer_end() { clearTimeout(atimer) }
 export function bid_timer_end() { clearTimeout(timer) }
