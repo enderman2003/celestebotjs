@@ -15,7 +15,7 @@ const globals = {
         value: 'false'
     },
     bidAmt: {
-        value: 0
+        value: ''
     },  
     hostId: {
         value: 0
@@ -59,7 +59,7 @@ async function bidWon(message, client) {
     .select('amt')
     .eq('dis_id', message.author.id)
     console.log(data)
-    var amount = data[0].amt - get_globals('bidAmt')
+    var amount = data[0].amt - parseInt(get_globals('bidAmt'))
     const { dat, err } = await supabase
     .from('Discord minigame')
     .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
