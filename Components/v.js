@@ -14,7 +14,7 @@ export async function v(msg, pages) {
 	   );
   const currPage = msg.channel.send({ embeds: [pages[page]], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
-  const col = await currPage.createButtonCollector(filter, { time: 20000 })
+  const col = await currPage.createMessageComponentCollector(filter, { time: 20000 })
 
   col.on("collect", button => {
     button.reply.defer()
