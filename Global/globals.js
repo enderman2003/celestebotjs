@@ -57,7 +57,7 @@ async function bidWon(message, client) {
     var amount = data[0].amt - get_globals('bidAmt')
     const { dat, err } = await supabase
     .from('Discord minigame')
-    .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
+    .upsert({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
     .eq('dis_id', message.author.id)
     console.log(dat)
     var wonEmbed = new EmbedBuilder()
