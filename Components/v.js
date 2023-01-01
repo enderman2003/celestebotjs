@@ -1,39 +1,33 @@
-import { pagination, TypesButtons, StylesButton } from '@devraelfreeze/discordjs-pagination';
+import { ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-import { EmbedBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+export async function v(msg, pages) {
+  let page = 0;
+  const row = new ActionRowBuilder()
+           .addComponents(
+		new ButtonBuilder()
+			.setCustomId('nextbtn')
+			.setLabel('Next')
+			.setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+			.setCustomId('prevbtn')
+			.setLabel('Next')
+			.setStyle(ButtonStyle.Primary),
+	   );
+  const currPage = await msg.channel.send({ embeds: pages[0], components: row })
+  const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
+  const col = await currPage.createButtonCollector(filter, { time: ms('10s') })
 
-export async function v(msg) {
-  var embed1 = new EmbedBuilder()
-  .setTitle("Test")
-  .setDescription()
-  var embed2 = new EmbedBuilder()
-  .setTitle("Test")
-  .setDescription()
-  var arrayEmbeds = [
-    embed1,
-    embed2
-  ]
-  await pagination({
-    embeds: arrayEmbeds, // Array of embeds objects
-    author: msg.author,
-    time: 30000, // 30 seconds
-    fastSkip: false,
-    disableButtons: true,
-    pageTravel: false,
-    
-    buttons: [
-        {
-            value: TypesButtons.previous,
-            label: 'Previous Page',
-            style: StylesButton.Success,
-            emoji: '⏮️'
-        },
-        {
-            value: TypesButtons.next,
-            label: 'Next Page',
-            style: StylesButton.Success,
-            emoji: '⏭️' // Disable emoji for this button
-        }
-     ]
+  col.on("collect", button => {
+    button.reply.defer()
+    if (button.clicker.user.id !== msg.author.id) {
+      return
+    }
+    if (button.id == "prevbtn) {
+      page = page > 0 ? --pages : pages.length - 1   
+    }
+    else if() {
+      page = page + 1 < page.length ? page++ : 0;
+    }
+    currPage.edit({ embed: pages[page] components: row }) 
   });
 }
