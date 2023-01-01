@@ -1,5 +1,4 @@
 import { ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
-import { ms } from 'ms';
 export async function v(msg, pages) {
   let page = 0;
   const row = new ActionRowBuilder()
@@ -15,7 +14,7 @@ export async function v(msg, pages) {
 	   );
   const currPage = msg.channel.send({ embeds: [pages[page]], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
-  const col = await currPage.createButtonCollector(filter, { time: ms('10s') })
+  const col = await currPage.createButtonCollector(filter, { time: 20000 })
 
   col.on("collect", button => {
     button.reply.defer()
