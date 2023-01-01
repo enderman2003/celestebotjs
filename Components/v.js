@@ -22,10 +22,10 @@ export async function v(msg, pages) {
     if (button.clicker.user.id !== msg.author.id) {
       return
     }
-    if (button.id == "prevbtn) {
+    if (button.id == "prevbtn") {
       page = page > 0 ? --pages : pages.length - 1   
     }
-    else if() {
+    else if(button.id == "nextbtn") {
       page = page + 1 < page.length ? page++ : 0;
     }
     currPage.edit({ embed: pages[page] components: row }) 
