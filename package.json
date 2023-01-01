@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.2.2",
+    "discordjs-button-pagination": "^3.0.1"
     "discord.js": "^14.7.1"
   },
   "devDependencies": {
