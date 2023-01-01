@@ -2,7 +2,7 @@ import { pagination, TypesButtons, StylesButton } from '@devraelfreeze/discordjs
 
 import { EmbedBuilder , ButtonBuilder, ButtonStyle } from 'discord.js';
 
-export function v() {
+export async function v() {
   await pagination({
     interaction: interaction,
     embeds: arrayEmbeds, // Array of embeds objects
