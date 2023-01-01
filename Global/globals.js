@@ -56,7 +56,7 @@ async function bidWon(message, client) {
     .select('claimed_waifus')
     .eq('dis_id', message.author.id)
 
-    for (let i=0; i<adata[0].claimed_waifus.length; i++) { a_data.push(adata[0].claimed_waifus[i]) }
+    for (var i=0; i<adata[0].claimed_waifus.length; i++) { a_data.push(adata[0].claimed_waifus[i]) }
 
     const { data, error } = await supabase
     .from('Discord minigame')
