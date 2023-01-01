@@ -69,7 +69,6 @@ async function bidWon(message, client) {
     .from('Discord minigame')
     .update({ 'amt': amount, 'claimed_waifus': a_data })
     .eq('dis_id', message.author.id)
-    console.log(dat)
 
     var wonEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
