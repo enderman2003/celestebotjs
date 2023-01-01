@@ -38,7 +38,13 @@ client.on('messageCreate', async msg => {
 	    ha(msg, client)
 	    break;
         case "v":
-            v(msg)
+            var data = await supabase.from("Discord minigame").select("claimed_waifus").eq("dis_id", msg.author.id)
+            console.log(data)
+            var msgEmbed = []
+            for(int i=0; i<=data[0].length; i++) {
+              msgEmbed.push(new EmbedBuilder().setTitle("Claimed Assets").setImage("https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/" + data[0].claimed_waifus[i]))
+            }
+            v(msg, msgEmbed)
             break;
 	default:	   
 	    break;    
@@ -110,7 +116,7 @@ I hope that one day you change your mind and come back to our server! 🍧๑ We
 	.setFooter({ text: member.user.username });
 
     var channel = await client.channels.fetch(LEAVE_CHANNEL)
-	channel.send({ embeds: [goodbyeEmbed] })
+    channel.send({ embeds: [goodbyeEmbed] })
 });
 
 client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.Giw_LQ.YVY9XwV_RylVqK8ZLfe6kI0doRZ90P9HCg6-PE")
