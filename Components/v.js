@@ -7,14 +7,11 @@ export function v() {
     interaction: interaction,
     embeds: arrayEmbeds, // Array of embeds objects
     author: interaction.member.user,
-    time: 40000, // 40 seconds
+    time: 30000, // 30 seconds
     fastSkip: false,
     disableButtons: true,
     pageTravel: false,
-    /** Enable buttons pagination system only for member with ID: 123456789 */
-    customFilter: (interaction) => {
-        return interaction.member.user.id === '123456789';
-    },
+    
     buttons: [
         {
             value: TypesButtons.previous,
