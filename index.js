@@ -38,7 +38,10 @@ client.on('messageCreate', async msg => {
 	    ha(msg, client)
 	    break;
         case "v":
-            var data = await supabase.from("Discord minigame").select("claimed_waifus").eq("dis_id", msg.author.id)
+            const {data, error} = await supabase
+            .from("Discord minigame")
+            .select("claimed_waifus")
+            .eq("dis_id", msg.author.id)
             console.log(data)
             var msgEmbed = []
             for(let i=0; i<=data[0].length; i++) {
