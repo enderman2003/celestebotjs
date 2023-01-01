@@ -12,9 +12,9 @@ export async function v(msg, pages) {
 			.setLabel('Previous')
 			.setStyle(ButtonStyle.Primary),
 	   );
-  const currPage = await msg.reply({ embeds: [pages[page]], component: row })
+  const currPage = msg.reply({ embeds: [pages[page]], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
-  const col = await currPage.createMessageComponentCollector({ componentType: ComponentType.Button,  time: 20000 })
+  const col = currPage.createMessageComponentCollector({ componentType: ComponentType.Button,  time: 20000 })
 
   col.on("collect", button => {
     button.reply.defer()
@@ -27,6 +27,6 @@ export async function v(msg, pages) {
     else if(button.id == "nextbtn") {
       page = page + 1 < page.length ? page++ : 0;
     }
-    await currPage.editReply({ embeds: [pages[page]], component: row }) 
+    currPage.editReply({ embeds: [pages[page]], component: row }) 
   });
 }
