@@ -1,5 +1,5 @@
 import { ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
-
+import { ms } from 'ms';
 export async function v(msg, pages) {
   let page = 0;
   const row = new ActionRowBuilder()
