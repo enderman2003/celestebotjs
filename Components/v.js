@@ -10,10 +10,10 @@ export async function v(msg, pages) {
 			.setStyle(ButtonStyle.Primary),
                 new ButtonBuilder()
 			.setCustomId('prevbtn')
-			.setLabel('Next')
+			.setLabel('Previous')
 			.setStyle(ButtonStyle.Primary),
 	   );
-  const currPage = await msg.channel.send({ embeds: pages[0], component: row })
+  const currPage = await msg.channel.send({ embeds: pages[page], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
   const col = await currPage.createButtonCollector(filter, { time: ms('10s') })
 
