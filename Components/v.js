@@ -28,6 +28,6 @@ export async function v(msg, pages) {
     else if(button.id == "nextbtn") {
       page = page + 1 < page.length ? page++ : 0;
     }
-    currPage.edit({ embeds: pages[page] component: row }) 
+    currPage.edit({ embeds: pages[page], component: row }) 
   });
 }
