@@ -13,9 +13,9 @@ export async function v(msg, pages) {
 			.setLabel('Previous')
 			.setStyle(ButtonStyle.Primary),
 	   );
-  const currPage = await msg.channel.send({ embeds: pages[page], component: row })
+  const currPage = msg.channel.send({ embeds: pages[page], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
-  const col = currPage.createButtonCollector(filter, { time: ms('10s') })
+  const col = await currPage.createButtonCollector(filter, { time: ms('10s') })
 
   col.on("collect", button => {
     button.reply.defer()
