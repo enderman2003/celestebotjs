@@ -17,7 +17,7 @@ export function v(msg, pages) {
   const col = msg.channel.createMessageCollector({ componentType: ComponentType.Button,  time: 20000 })
 
   col.on("collect", button => {
-    if (button.clicker.user.id !== msg.author.id) {
+    if (button.user.id !== msg.author.id) {
       return
     }
     if (button.id == "prevbtn") {
