@@ -50,16 +50,26 @@ export function set_globals(global, value) {
 };
 
 async function bidWon(message, client) {
+    var a_data = []
+    const { adata, error } = await supabase
+    .from('Discord minigame')
+    .select('claimed_waifus')
+    .eq('dis_id', message.author.id)
+    for (let i=0; i<adata[0].claimed_waifus.length(); i++) { a_data.push(data[0].claimed_waifus[i]) }
+
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('amt')
     .eq('dis_id', message.author.id)
     var amount = data[0].amt - get_globals('bidAmt')
+
+    a_data.push(get_globals('imgHash'))
     const { dat, err } = await supabase
     .from('Discord minigame')
-    .upsert({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
+    .upsert({ 'amt': amount, 'claimed_waifus': a_data })
     .eq('dis_id', message.author.id)
     console.log(dat)
+
     var wonEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
     .setTitle('Bid Won')
