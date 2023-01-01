@@ -38,7 +38,7 @@ client.on('messageCreate', async msg => {
 	    ha(msg, client)
 	    break;
         case "v":
-            v()
+            v(msg)
             break;
 	default:	   
 	    break;    
