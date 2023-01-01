@@ -13,7 +13,7 @@ export async function v(msg, pages) {
 			.setLabel('Previous')
 			.setStyle(ButtonStyle.Primary),
 	   );
-  const currPage = msg.channel.send({ embeds: pages[page], component: row })
+  const currPage = msg.channel.send({ embeds: [pages[page]], component: row })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
   const col = await currPage.createButtonCollector(filter, { time: ms('10s') })
 
@@ -28,6 +28,6 @@ export async function v(msg, pages) {
     else if(button.id == "nextbtn") {
       page = page + 1 < page.length ? page++ : 0;
     }
-    currPage.edit({ embeds: pages[page], component: row }) 
+    currPage.edit({ embeds: [pages[page]], component: row }) 
   });
 }
