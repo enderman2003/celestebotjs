@@ -17,14 +17,15 @@ export function v(msg, pages) {
   const col = msg.channel.createMessageCollector({ componentType: ComponentType.Button,  time: 20000 })
 
   col.on("collect", button => {
-    button.deferReply()
     if (button.clicker.user.id !== msg.author.id) {
       return
     }
     if (button.id == "prevbtn") {
       page = page > 0 ? --pages : pages.length - 1   
+      button.deferUpdate()
     }
     else if(button.id == "nextbtn") {
+      button.deferUpdate()
       page = page + 1 < page.length ? page++ : 0;
     }
     currPage.editReply({ embeds: [pages[page]], component: row }) 
