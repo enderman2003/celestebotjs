@@ -1,7 +1,7 @@
 import { regbid } from './Components/regbid.js'
 import { b } from './Components/b.js'
 import { ha } from './Components/ha.js'
-
+import { v } from './Components/v.js'
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
@@ -37,6 +37,9 @@ client.on('messageCreate', async msg => {
 	case "ha":
 	    ha(msg, client)
 	    break;
+        case "v":
+            v()
+            break;
 	default:	   
 	    break;    
     }
