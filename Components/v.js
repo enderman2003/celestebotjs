@@ -2,7 +2,7 @@ const paginationEmbed = require('discordjs-button-pagination');
 
 const { EmbedBuilder , ButtonBuilder, ButtonStyle } = require('discord.js');
 
-export default function v() {
+export function v() {
   const embed1 = new EmbedBuilder()
                 .setTitle('First Page')
                 .setDescription('This is the first page');
