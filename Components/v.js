@@ -1,6 +1,6 @@
-const paginationEmbed = require('discordjs-button-pagination');
+import { paginationEmbed } from 'discordjs-button-pagination';
 
-const { EmbedBuilder , ButtonBuilder, ButtonStyle } = require('discord.js');
+import { EmbedBuilder , ButtonBuilder, ButtonStyle } from 'discord.js';
 
 export function v() {
   const embed1 = new EmbedBuilder()
