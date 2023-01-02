@@ -55,7 +55,7 @@ async function bidWon(message, client) {
     .from('Discord minigame')
     .select('amt', 'claimed_waifus')
     .eq('dis_id', message.author.id.toString())
-    console.log(message.author.id)
+    console.log(data)
     for (var i=0; i<=data[0].claimed_waifus.length; i++) { a_data.push(data[0].claimed_waifus[i]) }
     var amount = data[0].amt - get_globals('bidAmt')
 
