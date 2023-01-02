@@ -5,8 +5,8 @@ import { v } from './Components/v.js'
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
-const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
+const SUPABASE_URL = process.env.SUPABASE_URL
+const SUPABASE_KEY = process.env.SUPABASE_KEY
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
@@ -122,4 +122,4 @@ I hope that one day you change your mind and come back to our server! 🍧๑ We
     channel.send({ embeds: [goodbyeEmbed] })
 });
 
-client.login("MTA1MTcyMjk3Mzk3Njk5Mzg1Mg.Giw_LQ.YVY9XwV_RylVqK8ZLfe6kI0doRZ90P9HCg6-PE")
+client.login(process.env.DISCORD_TOKEN)
