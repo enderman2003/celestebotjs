@@ -56,7 +56,7 @@ async function bidWon(message, client) {
     .select('amt', 'claimed_waifus')
     .eq('dis_id', message.author.id.toString())
     console.log(data)
-    if (data[0].claimed_waifus[0] == null) {
+    if (data[0].claimed_waifus == null) {
         const { dat, err } = await supabase
         .from('Discord minigame')
         .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
@@ -79,7 +79,7 @@ async function bidWon(message, client) {
         
         return true
     }
-    for (const i in data[0].claimed_waifus) { a_data.push(data[0].claimed_waifus[i]) }
+    for (const i in data[0].claimed_waifus.length) { a_data.push(data[0].claimed_waifus[i]) }
     var amount = data[0].amt - get_globals('bidAmt')
 
     a_data.push(get_globals('imgHash'))
