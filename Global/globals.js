@@ -80,6 +80,7 @@ async function bidWon(message, client) {
         return true
     }
     for (const i in data[0].claimed_waifus.length) { a_data.push(data[0].claimed_waifus[i]) }
+    console.log(a_data)
     var amount = data[0].amt - get_globals('bidAmt')
 
     a_data.push(get_globals('imgHash'))
