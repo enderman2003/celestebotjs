@@ -70,6 +70,13 @@ async function bidWon(message, client) {
 
         var channel = await client.channels.fetch(WAIFU_CHANNEL)
         channel.send({ embeds: [wonEmbed] })
+        
+        set_globals('auctionProcess', 'false')
+        set_globals('imgHash', '')
+        set_globals('bidderId', 0)
+        set_globals('bidAmt', 0)
+        set_globals('hostId', 0)
+        
         return true
     }
     for (var i=0; i<=data[0].claimed_waifus.length; i++) { a_data.push(data[0].claimed_waifus[i]) }
