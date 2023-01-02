@@ -54,21 +54,21 @@ async function bidWon(message, client) {
     const { adata, aerror } = await supabase
     .from('Discord minigame')
     .select('claimed_waifus')
-    .eq('dis_id', get_globals('bidderId'))
-    console.log(adata)
+    .eq('dis_id', message.author.id)
+    console.log(message.author.id)
     for (var i=0; i<=adata[0].claimed_waifus.length; i++) { a_data.push(adata[0].claimed_waifus[i]) }
 
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('amt')
-    .eq('dis_id',get_globals('bidderId'))
+    .eq('dis_id', message.author.id)
     var amount = data[0].amt - get_globals('bidAmt')
 
     a_data.push(get_globals('imgHash'))
     const { dat, err } = await supabase
     .from('Discord minigame')
     .update({ 'amt': amount, 'claimed_waifus': a_data })
-    .eq('dis_id', get_globals('bidderId'))
+    .eq('dis_id', message.author.id)
 
     var wonEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
@@ -77,11 +77,11 @@ async function bidWon(message, client) {
     .setImage('https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/' + get_globals('imgHash'))
     .setFooter({ text: message.author.username });
 
-    set_globals('imgHash', '')
-
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [wonEmbed] })
+    
     set_globals('auctionProcess', 'false')
+    set_globals('imgHash', '')
     set_globals('bidderId', 0)
     set_globals('bidAmt', 0)
     set_globals('hostId', 0)
