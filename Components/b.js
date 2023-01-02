@@ -1,8 +1,8 @@
 import { EmbedBuilder } from "discord.js"
 import { get_globals, set_globals, bid_timer } from "../Global/globals.js"
 import { createClient } from '@supabase/supabase-js'
-const SUPABASE_URL = 'https://dxflwfledezyinanacmg.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Zmx3ZmxlZGV6eWluYW5hY21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk2OTczMzksImV4cCI6MTk4NTI3MzMzOX0.2aWmdFYDY_SBTMwNT1zeOGv-R_5uuBZEoVS9RxNCNaI'
+const SUPABASE_URL = process.env.SUPABASE_URL
+const SUPABASE_KEY = process.env.SUPABASE_KEY
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
@@ -16,7 +16,7 @@ export async function b(message, args, client) {
                 .setColor(0xFF0000)
                 .setTitle('Forbidden 403')
                 .setDescription('Forbidden 403. Invalid amount input')
-
+                
                 channel = await client.channels.fetch(WAIFU_CHANNEL)
                 channel.send({ embeds: [errEmbed] })
                 return true
