@@ -19,12 +19,12 @@ export async function regbid(message, args, client) {
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('dis_id')
-    .eq('dis_id', message.author.id) 
+    .eq('dis_id', message.author.id.toString()) 
     console.log(data)
     if (data[0].dis_id != message.author.id.toString()) {
         const { error } = await supabase
         .from('Discord minigame')
-        .insert({ dis_id: message.author.id, amt: 500})
+        .insert({ dis_id: message.author.id.toString(), amt: 500})
         console.log(error)
         if (error==null){
             var registerEmbed = new EmbedBuilder()
