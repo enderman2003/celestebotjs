@@ -21,7 +21,7 @@ export async function regbid(message, args, client) {
     .select('dis_id')
     .eq('dis_id', message.author.id.toString()) 
     console.log(data)
-    if (data == null) {
+    if (data[0] == null) {
         const { error } = await supabase
         .from('Discord minigame')
         .insert({ dis_id: message.author.id.toString(), amt: 500})
