@@ -51,17 +51,12 @@ export function set_globals(global, value) {
 
 async function bidWon(message, client) {
     var a_data = []
-    const { adata, aerror } = await supabase
-    .from('Discord minigame')
-    .select('claimed_waifus')
-    .eq('dis_id', message.author.id)
-    console.log(message.author.id)
-    for (var i=0; i<=adata[0].claimed_waifus.length; i++) { a_data.push(adata[0].claimed_waifus[i]) }
-
     const { data, error } = await supabase
     .from('Discord minigame')
-    .select('amt')
+    .select('amt', 'claimed_waifus')
     .eq('dis_id', message.author.id)
+    console.log(message.author.id)
+    for (var i=0; i<=data[0].claimed_waifus.length; i++) { a_data.push(data[0].claimed_waifus[i]) }
     var amount = data[0].amt - get_globals('bidAmt')
 
     a_data.push(get_globals('imgHash'))
