@@ -56,9 +56,9 @@ client.on('messageCreate', async msg => {
             v(msg, msgEmbed)
             break;
 	case 'lb':
- 	    const userCooldowned = await hourlyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
-	    if(userCooldowned){
-		const timeLeft = msToMinutes(userCooldowned.msLeft, false); // False for excluding '0' characters for each number < 10
+ 	    const userCooldowneddaily = await hourlyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
+	    if(userCooldowneddaily){
+		const timeLeft = msToMinutes(userCooldowneddaily.msLeft, false); // False for excluding '0' characters for each number < 10
 		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
 	    }else{
 		// do your command stuff
@@ -67,9 +67,9 @@ client.on('messageCreate', async msg => {
 	    }
 	    break;    
 	case 'dc':
- 	    const userCooldowned = await dailyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
-	    if(userCooldowned){
-		const timeLeft = msToMinutes(userCooldowned.msLeft, false); // False for excluding '0' characters for each number < 10
+ 	    const userCooldownedhourly = await dailyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
+	    if(userCooldownedhourly){
+		const timeLeft = msToMinutes(userCooldownedhourly.msLeft, false); // False for excluding '0' characters for each number < 10
 		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
 	    }else{
 		// do your command stuff
