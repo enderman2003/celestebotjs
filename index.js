@@ -19,8 +19,8 @@ const Prefix = "C!"
 const GREET_CHANNEL = "1056425420746141708"
 const LEAVE_CHANNEL = "1056425420746141708"
 
-const hourlyCommand = new CommandCooldown('earnCash', 10800000);
-const dailyCommand = new CommandCooldown('earnCash', 86400000);
+const hourlyCommand = new CommandCooldown('lb', 10800000);
+const dailyCommand = new CommandCooldown('dc', 86400000);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
