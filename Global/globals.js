@@ -57,6 +57,7 @@ async function bidWon(message, client) {
     .eq('dis_id', message.author.id.toString())
     console.log(data)
     if (data[0].claimed_waifus === []) {
+        console.log("null")
         const { dat, err } = await supabase
         .from('Discord minigame')
         .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
