@@ -50,7 +50,7 @@ export function set_globals(global, value) {
 };
 
 async function bidWon(message, client) {
-    c_data = []
+    var c_data = []
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('*')
