@@ -2,6 +2,10 @@ import { regbid } from './Components/regbid.js'
 import { b } from './Components/b.js'
 import { ha } from './Components/ha.js'
 import { v } from './Components/v.js'
+import { lb } from './Components/lb.js'
+import { dc } from './Components/dc.js'
+
+const {CommandCooldown, msToMinutes} = require('discord-command-cooldown')
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
@@ -14,7 +18,9 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 const Prefix = "C!"
 const GREET_CHANNEL = "1056425420746141708"
 const LEAVE_CHANNEL = "1056425420746141708"
-  
+
+const hourlyCommand = new CommandCooldown('earnCash', 10800000);
+const dailyCommand = new CommandCooldown('earnCash', 86400000);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -49,6 +55,29 @@ client.on('messageCreate', async msg => {
             }
             v(msg, msgEmbed)
             break;
+	case 'lb':
+ 	    const userCooldowned = await hourlyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
+	    if(userCooldowned){
+		const timeLeft = msToMinutes(userCooldowned.msLeft, false); // False for excluding '0' characters for each number < 10
+		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
+	    }else{
+		// do your command stuff
+		lb(msg, client)
+		await hourlyCommand.addUser(msg.author.id); // Cooldown user again
+	    }
+	    break;    
+	case 'dc':
+ 	    const userCooldowned = await dailyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
+	    if(userCooldowned){
+		const timeLeft = msToMinutes(userCooldowned.msLeft, false); // False for excluding '0' characters for each number < 10
+		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
+	    }else{
+		// do your command stuff
+		// and
+		dc(msg, client);
+		await dailyCommand.addUser(msg.author.id); // Cooldown user again
+	    }
+	    break;
 	default:	   
 	    break;    
     }
