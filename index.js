@@ -5,7 +5,7 @@ import { v } from './Components/v.js'
 import { lb } from './Components/lb.js'
 import { dc } from './Components/dc.js'
 
-const {CommandCooldown, msToMinutes} = require('discord-command-cooldown')
+import { CommandCooldown, msToMinutes } from ('discord-command-cooldown')
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
