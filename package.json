@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.2.2",
+    "discord-command-cooldown": "^1.0.8",
     "discord.js": "^14.7.1"
   },
   "devDependencies": {
