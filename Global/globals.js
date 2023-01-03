@@ -50,17 +50,16 @@ export function set_globals(global, value) {
 };
 
 async function bidWon(message, client) {
-    var a_data = []
     const { data, error } = await supabase
     .from('Discord minigame')
-    .select('amt', 'claimed_waifus')
+    .select('*')
     .eq('dis_id', message.author.id.toString())
     console.log(data)
     if (data[0].claimed_waifus === []) {
         console.log("null")
         const { dat, err } = await supabase
         .from('Discord minigame')
-        .update({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
+        .upsert({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
         .eq('dis_id', message.author.id.toString())
         var wonEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
@@ -81,15 +80,11 @@ async function bidWon(message, client) {
         return true
     }
     console.log(data[0].claimed_waifus)
-    a_data.push(data[0].claimed_waifus)
-    console.log(a_data)
     var amount = data[0].amt - get_globals('bidAmt')
-
-    a_data.push(get_globals('imgHash'))
     
     const { dat, err } = await supabase
     .from('Discord minigame')
-    .update({ 'amt': amount, 'claimed_waifus': a_data })
+    .upsert({ 'amt': amount, 'claimed_waifus': get_globals('imgHash') })
     .eq('dis_id', message.author.id.toString())
 
     var wonEmbed = new EmbedBuilder()
