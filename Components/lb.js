@@ -25,7 +25,7 @@ export async function lb(message, client) {
   var wonEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
         .setTitle('Claimed Daily')
-        .setDescription(`Claimed lootbox by ${message.author.username}. \n Amount ${rndInt} :coin: successfully credited. \n Total Balance: ${data[0].amt} :coin:`)
+        .setDescription(`Claimed lootbox by ${message.author.username}. \nAmount ${rndInt} :coin: successfully credited. \nTotal Balance: ${data[0].amt} :coin:`)
         .setFooter({ text: message.author.username });
   
   var channel = await client.channels.fetch(WAIFU_CHANNEL)
