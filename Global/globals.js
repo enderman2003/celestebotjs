@@ -60,7 +60,7 @@ async function bidWon(message, client) {
         console.log("null")
         const { dat, err } = await supabase
         .from('Discord minigame')
-        .upsert({ 'amt': amount, 'claimed_waifus': [get_globals('imgHash')] })
+        .update({ 'amt': amount, 'claimed_waifus': { "waifus": [get_globals('imgHash')] } })
         .eq('dis_id', message.author.id.toString())
         var wonEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
@@ -80,7 +80,7 @@ async function bidWon(message, client) {
         
         return true
     }
-    c_data.push(data[0].claimed_waifus.waifus)
+    for(var i=0; i<data[0].claimed_waifus.waifus.length; i++) { c_data.push(data[0].claimed_waifus.waifus[i]) }
     console.log(c_data)
     console.log(data[0].claimed_waifus.waifus)
     var amount = data[0].amt - get_globals('bidAmt')
