@@ -8,7 +8,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
 
 
-export async function dc(message, client) {
+export async function lb(message, client) {
   const rndInt = randomIntFromInterval(50, 350)
   const { data, error } = await supabase
     .from('Discord minigame')
@@ -25,7 +25,7 @@ export async function dc(message, client) {
   var wonEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
         .setTitle('Claimed Daily')
-        .setDescription(`Claimed lootbox for today by ${message.author.username}. \n Amount ${rndInt} :coin: successfully credited. \n Total Balance: ${data[0].amt} :coin:`)
+        .setDescription(`Claimed lootbox by ${message.author.username}. \n Amount ${rndInt} :coin: successfully credited. \n Total Balance: ${data[0].amt} :coin:`)
         .setFooter({ text: message.author.username });
   
   var channel = await client.channels.fetch(WAIFU_CHANNEL)
