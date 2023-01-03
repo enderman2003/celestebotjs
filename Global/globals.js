@@ -50,6 +50,7 @@ export function set_globals(global, value) {
 };
 
 async function bidWon(message, client) {
+    c_data = []
     const { data, error } = await supabase
     .from('Discord minigame')
     .select('*')
@@ -79,12 +80,16 @@ async function bidWon(message, client) {
         
         return true
     }
-    console.log(data[0].claimed_waifus)
+    c_data.push(data[0].claimed_waifus.waifus)
+    console.log(c_data)
+    console.log(data[0].claimed_waifus.waifus)
     var amount = data[0].amt - get_globals('bidAmt')
+    
+    c_data.push(get_globals('imgHash'))
     
     const { dat, err } = await supabase
     .from('Discord minigame')
-    .upsert({ 'amt': amount, 'claimed_waifus': get_globals('imgHash') })
+    .update({ 'amt': amount, 'claimed_waifus': { 'waifus': c_data } })
     .eq('dis_id', message.author.id.toString())
 
     var wonEmbed = new EmbedBuilder()
