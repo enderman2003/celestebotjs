@@ -6,7 +6,7 @@ const SUPABASE_KEY = process.env.SUPABASE_KEY
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = "1056425420746141708"
 
-export async function bal(msg, client) {
+export async function bal(message, client) {
   const { data, error } = await supabase
     .from('Discord minigame')
     .select('*')
