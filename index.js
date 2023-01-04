@@ -27,6 +27,7 @@ var hourlyTimer;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
+  client.user.setActivity('Watching over Celeste', { type: 'CUSTOM' })
 })
 
 client.on('messageCreate', async msg => {
