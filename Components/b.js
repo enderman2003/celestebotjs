@@ -5,7 +5,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_KEY
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-const WAIFU_CHANNEL = "1056425420746141708"
+const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function b(message, args, client) {
     if (get_globals("auctionProcess") === 'true') {
