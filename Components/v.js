@@ -12,7 +12,7 @@ export function v(msg, pages) {
 			.setLabel('Previous')
 			.setStyle(ButtonStyle.Primary),
 	   );
-  const currPage = msg.reply({ embeds: [pages[page]], component: row })
+  const currPage = msg.reply({ embeds: [pages[page]], components: [row] })
   const filter = (b) => ["nextbtn", "prevbtn"].includes(b.id)
   const col = msg.channel.createMessageCollector({ componentType: ComponentType.Button,  time: 20000 })
 
@@ -28,6 +28,6 @@ export function v(msg, pages) {
       button.deferUpdate()
       page = page + 1 < page.length ? page++ : 0;
     }
-    currPage.editReply({ embeds: [pages[page]], component: row }) 
+    currPage.editReply({ embeds: [pages[page]], components: [row] }) 
   });
 }
