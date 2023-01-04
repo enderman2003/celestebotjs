@@ -24,7 +24,7 @@ export async function lb(message, client) {
     
   var wonEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
-        .setTitle('Claimed Daily')
+        .setTitle('Claimed Lootbox')
         .setDescription(`Claimed lootbox by ${message.author.username}. \nAmount ${rndInt} :coin: successfully credited. \nTotal Balance: ${amount} :coin:`)
         .setFooter({ text: message.author.username });
   
