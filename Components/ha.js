@@ -4,7 +4,7 @@ import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js
 const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_KEY
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-const WAIFU_CHANNEL = "1056425420746141708"
+const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 var j = 0
 
 export async function ha(message, client) {
