@@ -16,8 +16,8 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 const Prefix = "C!"
-const GREET_CHANNEL = "1056425420746141708"
-const LEAVE_CHANNEL = "1056425420746141708"
+const GREET_CHANNEL = process.env.GREET_CHANNEL
+const LEAVE_CHANNEL = process.env.LEAVE_CHANNEL
 
 const hourlycd = new Set();
 const dailycd = new Set();
