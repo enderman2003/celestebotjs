@@ -80,7 +80,7 @@ client.on('messageCreate', async msg => {
                 }, 86400000);
             }
 	    break;
-        case 'dc':
+        case 'bal':
             bal(msg, client)
             break;
 	default:	   
