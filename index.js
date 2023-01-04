@@ -59,9 +59,9 @@ client.on('messageCreate', async msg => {
             break;
 	case 'lb':
  	    if (hourlycd.has(msg.author.id)) {
-                msg.channel.send(`Wait ${getTimeLeft(hourlyTimer)} before getting typing this again. - ` + msg.author);
+                msg.reply(`Wait ${getTimeLeft(hourlyTimer)} before getting typing this again. - ` + msg.author.username);
             } else {
-
+                lb(msg, client)
                 hourlycd.add(msg.author.id);
                 hourlyTimer= setTimeout(() => {
                     hourlycd.delete(msg.author.id);
@@ -70,9 +70,9 @@ client.on('messageCreate', async msg => {
 	    break;    
 	case 'dc':
  	    if (dailycd.has(msg.author.id)) {
-                msg.channel.send(`Wait ${getTimeLeft(dailyTimer)} before getting typing this again. - ` + msg.author);
+                msg.reply(`Wait ${getTimeLeft(dailyTimer)} before getting typing this again. - ` + msg.author.username);
             } else {
-
+                dc(msg, client)
                 dailycd.add(msg.author.id);
                 dailyTimer = setTimeout(() => {
                     dailycd.delete(msg.author.id);
@@ -85,7 +85,7 @@ client.on('messageCreate', async msg => {
 });
 
 function getTimeLeft(timeout){
-  return Math.ceil((timeout._idleStart + timeout._idleTimeout)/1000 - process.uptime());
+  return Math.ceil((timeout._idleStart + timeout._idleTimeout)/1000 * 60 - process.uptime());
 }
 
 client.on('guildMemberAdd', async member => {
