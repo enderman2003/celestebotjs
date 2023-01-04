@@ -5,7 +5,6 @@ import { v } from './Components/v.js'
 import { lb } from './Components/lb.js'
 import { dc } from './Components/dc.js'
 
-import { CommandCooldown, msToMinutes } from 'discord-command-cooldown'
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
 import { Client, EmbedBuilder, GatewayIntentBits, userMention } from "discord.js"
@@ -19,8 +18,11 @@ const Prefix = "C!"
 const GREET_CHANNEL = "1056425420746141708"
 const LEAVE_CHANNEL = "1056425420746141708"
 
-const hourlyCommand = new CommandCooldown('lb', 10800000);
-const dailyCommand = new CommandCooldown('dc', 86400000);
+const hourlycd = new Set();
+const dailycd = new Set();
+
+var dailyTimer;
+var hourlyTimer;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -56,32 +58,35 @@ client.on('messageCreate', async msg => {
             v(msg, msgEmbed)
             break;
 	case 'lb':
- 	    const userCooldowneddaily = await hourlyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
-	    if(userCooldowneddaily){
-		const timeLeft = msToMinutes(userCooldowneddaily.msLeft, false); // False for excluding '0' characters for each number < 10
-		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
-	    }else{
-		// do your command stuff
-		lb(msg, client)
-		await hourlyCommand.addUser(msg.author.id); // Cooldown user again
-	    }
+ 	    if (hourlycd.has(msg.author.id)) {
+                msg.channel.send(`Wait ${getTimeLeft(hourlyTimer)} before getting typing this again. - ` + msg.author);
+            } else {
+
+                hourlycd.add(msg.author.id);
+                hourlyTimer= setTimeout(() => {
+                    hourlycd.delete(msg.author.id);
+                }, 10800000);
+            }
 	    break;    
 	case 'dc':
- 	    const userCooldownedhourly = await dailyCommand.getUser(msg.author.id); // Check if user need to be cooldowned
-	    if(userCooldownedhourly){
-		const timeLeft = msToMinutes(userCooldownedhourly.msLeft, false); // False for excluding '0' characters for each number < 10
-		msg.reply(`You need to wait ${ timeLeft.hours + ' hours, ' + timeLeft.minutes + ' minutes, ' + timeLeft.seconds + ' seconds'} before running command again!`);
-	    }else{
-		// do your command stuff
-		// and
-		dc(msg, client);
-		await dailyCommand.addUser(msg.author.id); // Cooldown user again
-	    }
+ 	    if (dailycd.has(msg.author.id)) {
+                msg.channel.send(`Wait ${getTimeLeft(dailyTimer)} before getting typing this again. - ` + msg.author);
+            } else {
+
+                dailycd.add(msg.author.id);
+                dailyTimer = setTimeout(() => {
+                    dailycd.delete(msg.author.id);
+                }, 86400000);
+            }
 	    break;
 	default:	   
 	    break;    
     }
 });
+
+function getTimeLeft(timeout){
+  return Math.ceil((timeout._idleStart + timeout._idleTimeout)/1000 - process.uptime());
+}
 
 client.on('guildMemberAdd', async member => {
     const { data, error } = await supabase
