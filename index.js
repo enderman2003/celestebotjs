@@ -4,6 +4,7 @@ import { ha } from './Components/ha.js'
 import { v } from './Components/v.js'
 import { lb } from './Components/lb.js'
 import { dc } from './Components/dc.js'
+import { bal } from './Components/bal.js'
 
 import { createClient } from '@supabase/supabase-js'
 import { bid_timer_end, auction_timer_end } from "./Global/globals.js"
@@ -59,7 +60,7 @@ client.on('messageCreate', async msg => {
             break;
 	case 'lb':
  	    if (hourlycd.has(msg.author.id)) {
-                msg.reply(`Wait ${getTimeLeft(hourlyTimer)} before getting typing this again. - ` + msg.author.username);
+                msg.reply(`Wait time: ${getTimeLeft(hourlyTimer)} seconds. - ` + msg.author.username);
             } else {
                 lb(msg, client)
                 hourlycd.add(msg.author.id);
@@ -70,7 +71,7 @@ client.on('messageCreate', async msg => {
 	    break;    
 	case 'dc':
  	    if (dailycd.has(msg.author.id)) {
-                msg.reply(`Wait ${getTimeLeft(dailyTimer)} before getting typing this again. - ` + msg.author.username);
+                msg.reply(`Wait time: ${getTimeLeft(dailyTimer)} seconds. - ` + msg.author.username);
             } else {
                 dc(msg, client)
                 dailycd.add(msg.author.id);
@@ -79,13 +80,16 @@ client.on('messageCreate', async msg => {
                 }, 86400000);
             }
 	    break;
+        case 'dc':
+            bal(msg, client)
+            break;
 	default:	   
 	    break;    
     }
 });
 
 function getTimeLeft(timeout){
-  return Math.ceil((timeout._idleStart + timeout._idleTimeout)/1000 * 60 - process.uptime());
+  return Math.ceil((timeout._idleStart + timeout._idleTimeout)/1000 - process.uptime());
 }
 
 client.on('guildMemberAdd', async member => {
