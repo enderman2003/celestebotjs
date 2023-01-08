@@ -19,13 +19,15 @@ export async function ha(message, client) {
     .from('animenft')
     .list()
     if (dat != null) {
-      for (const i of data) {
-        if (data[j].name != i[j]) {
-          set_globals('imgHash', data[j].name)
-          console.log(data[j].name)
-          break;
+      for (const i in dat[0].claimed_waifus.waifus) {
+        for (var j in data) {
+          if (data[j].name != i[j]) {
+            set_globals('imgHash', data[j].name)
+            console.log(data[j].name)
+            break;
+          }
+          j++
         }
-        j++
       }
     }
     else { set_globals('imgHash', data[Math.floor(Math.random() * data.length) + 1].name) }
