@@ -9,7 +9,8 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function dc(message, client) {
-  const user = await supabase.auth.user()
+  const user = await supabase.auth.user
+  console.log(user)
   if(user!==null) { 
     const rndInt = randomIntFromInterval(500, 1500)
     const { data, error } = await supabase
