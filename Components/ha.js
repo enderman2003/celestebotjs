@@ -8,7 +8,7 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 var j = 0
 
 export async function ha(message, client) {
-  const user = supabase.auth.session().user
+  const user = supabase.auth.user
   if(user!==null && get_globals('auctionProcess') == 'false') { 
     set_globals('auctionProcess', 'true')
     const { dat, err} = await supabase
