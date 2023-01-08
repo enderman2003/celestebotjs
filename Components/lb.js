@@ -9,27 +9,40 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function lb(message, client) {
-  const rndInt = randomIntFromInterval(50, 350)
-  const { data, error } = await supabase
-    .from('Discord minigame')
-    .select('*')
-    .eq('dis_id', message.author.id.toString())
-  
-  var amount = data[0].amt + rndInt
-    
-  const { dat, err } = await supabase
-    .from('Discord minigame')
-    .update({ 'amt': amount })
-    .eq('dis_id', message.author.id.toString())
-    
-  var wonEmbed = new EmbedBuilder()
-        .setColor(0x0099FF)
-        .setTitle('Claimed Lootbox')
-        .setDescription(`Claimed lootbox by ${message.author.username}. \nAmount ${rndInt} :coin: successfully credited. \nTotal Balance: ${amount} :coin:`)
-        .setFooter({ text: message.author.username });
-  
-  var channel = await client.channels.fetch(WAIFU_CHANNEL)
-  channel.send({ embeds: [wonEmbed] })
+  const user = await supabase.auth.user()
+  if (user!==null) {
+    const rndInt = randomIntFromInterval(50, 350)
+    const { data, error } = await supabase
+      .from('Discord minigame')
+      .select('*')
+      .eq('dis_id', message.author.id.toString())
+
+    var amount = data[0].amt + rndInt
+
+    const { dat, err } = await supabase
+      .from('Discord minigame')
+      .update({ 'amt': amount })
+      .eq('dis_id', message.author.id.toString())
+
+    var wonEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle('Claimed Lootbox')
+          .setDescription(`Claimed lootbox by ${message.author.username}. \nAmount ${rndInt} :coin: successfully credited. \nTotal Balance: ${amount} :coin:`)
+          .setFooter({ text: message.author.username });
+
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [wonEmbed] })
+  }
+  else{
+    var lbEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle('User not Found')
+          .setDescription(`User not Registered`)
+          .setFooter({ text: message.author.username });
+
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [lbEmbed] })
+  }
 }
 
 function randomIntFromInterval(min, max) { // min and max included 
