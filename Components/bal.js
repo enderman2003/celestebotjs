@@ -7,7 +7,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function bal(message, client) {
-  const user = await supabase.auth.user()
+  const user = supabase.auth.user()
   if (user !== null) {
     const { data, error } = await supabase
       .from('Discord minigame')
