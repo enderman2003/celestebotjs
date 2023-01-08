@@ -7,16 +7,29 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function bal(message, client) {
-  const { data, error } = await supabase
-    .from('Discord minigame')
-    .select('*')
-    .eq('dis_id', message.author.id.toString())
-  var balEmbed = new EmbedBuilder()
-        .setColor(0x0099FF)
-        .setTitle('Check Balance')
-        .setDescription(`${message.author.username}. \nTotal Balance: ${data[0].amt} :coin:`)
-        .setFooter({ text: message.author.username });
-  
-  var channel = await client.channels.fetch(WAIFU_CHANNEL)
-  channel.send({ embeds: [balEmbed] })
+  const user = await supabase.auth.user()
+  if (user !== null) {
+    const { data, error } = await supabase
+      .from('Discord minigame')
+      .select('*')
+      .eq('dis_id', message.author.id.toString())
+    var balEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle('Check Balance')
+          .setDescription(`${message.author.username}. \nTotal Balance: ${data[0].amt} :coin:`)
+          .setFooter({ text: message.author.username });
+
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [balEmbed] })
+  }
+  else {
+    var balEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle('User not found')
+          .setDescription(`User not Registered`)
+          .setFooter({ text: message.author.username });
+
+    var channel = await client.channels.fetch(WAIFU_CHANNEL)
+    channel.send({ embeds: [balEmbed] })
+  }
 }
