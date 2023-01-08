@@ -21,9 +21,11 @@ const LEAVE_CHANNEL = process.env.LEAVE_CHANNEL
 
 const hourlycd = new Set();
 const dailycd = new Set();
+const auctioncd = new Set();
 
 var dailyTimer;
 var hourlyTimer;
+var auctionTimer;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -45,9 +47,17 @@ client.on('messageCreate', async msg => {
             b(msg, args, client)
             break;
 	case "ha":
-	    ha(msg, client)
+	    if (auctioncd.has(msg.author.id)) {
+                msg.reply(`Wait time: ${getTimeLeft(auctionTimer)} seconds. - ` + msg.author.username);
+            } else {
+                ha(msg, client)
+                auctioncd.add(msg.author.id);
+                auctionTimer= setTimeout(() => {
+                    auctioncd.delete(msg.author.id);
+                }, 10800000);
+            }
 	    break;
-        case "v":
+	case "v":
             const {data, error} = await supabase
             .from("Discord minigame")
             .select("claimed_waifus")
