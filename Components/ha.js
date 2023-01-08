@@ -9,7 +9,7 @@ var j = 0
 
 export async function ha(message, client) {
   const user = await supabase.auth.user()
-  if(user==null && get_globals('auctionProcess') == 'false') { 
+  if(user!==null && get_globals('auctionProcess') == 'false') { 
     set_globals('auctionProcess', 'true')
     const { dat, err} = await supabase
     .from('Discord minigame')
