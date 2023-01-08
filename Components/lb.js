@@ -9,7 +9,7 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function lb(message, client) {
-  const user = supabase.auth.user
+  const user = supabase.auth.session
   console.log(user)
   if (typeof user !== "undefined") {
     const rndInt = randomIntFromInterval(50, 350)
