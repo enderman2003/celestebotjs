@@ -10,7 +10,7 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function dc(message, client) {
   const user = await supabase.auth.user()
-  if(user==null && get_globals('auctionProcess') == 'false') { 
+  if(user!==null) { 
     const rndInt = randomIntFromInterval(500, 1500)
     const { data, error } = await supabase
       .from('Discord minigame')
