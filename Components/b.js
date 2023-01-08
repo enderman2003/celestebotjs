@@ -9,9 +9,9 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function b(message, args, client) {
     if (get_globals("auctionProcess") === 'true') {
-        const { data, error } = await supabase.auth.getSession()
-        if(error==null && get_globals("bidderId") != message.author.id){
-            if (args[0] < 0 || args[0] == null){
+        const user = await supabase.auth.user()
+        if(user==null && get_globals("bidderId") != message.author.id){
+            if (args[0] < 0 || args[0] == null || args[0] <= get_globals('bidAmt')){
                 var errEmbed = new EmbedBuilder()
                 .setColor(0xFF0000)
                 .setTitle('Forbidden 403')
