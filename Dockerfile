@@ -5,4 +5,4 @@ WORKDIR /bot
 COPY . /bot/
 
 RUN npm install
-CMD npm run start
+CMD ["npm", "run", "start"]
