@@ -36,7 +36,7 @@ export async function lb(message, client) {
   }
   else{
     var lbEmbed = new EmbedBuilder()
-          .setColor(0x0099FF)
+          .setColor(0xFF0000)
           .setTitle('User not Found')
           .setDescription(`User not Registered`)
           .setFooter({ text: message.author.username });
