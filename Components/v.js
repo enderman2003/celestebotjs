@@ -25,7 +25,7 @@ export function v(msg, pages) {
       button.deferUpdate()
     }
     else if(button.id == "nextbtn") {
-      page = page + 1 < page.length ? page++ : 0;
+      page = page + 1 < pages.length ? page++ : 0;
       button.deferUpdate()
     }
     currPage.editReply({ embeds: [pages[page]], components: [row] }) 
