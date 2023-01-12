@@ -28,6 +28,6 @@ export function v(msg, pages) {
       page = page + 1 < pages.length ? page++ : 0;
       button.deferUpdate()
     }
-    currPage.editReply({ embeds: [pages[page]], components: [row] }) 
+    msg.editReply({ embeds: [pages[page]], components: [row] }) 
   });
 }
