@@ -111,7 +111,6 @@ client.on('guildMemberAdd', async member => {
     if (error != null){
         return true
     }
-	console.log(data)
     var welcomeEmbed = new EmbedBuilder()
     .setColor(0x0099FF)
 	.setTitle('WELCOME')
@@ -144,7 +143,7 @@ which you can find underneath the rules !!!* ୨ 🍣
 	.setFooter({ text: member.user.username });
 
     var channel = await client.channels.fetch(GREET_CHANNEL)
-	channel.send({ embeds: [welcomeEmbed] })
+    channel.send({ embeds: [welcomeEmbed] })
 });
 
 client.on('guildMemberRemove', async member => {
