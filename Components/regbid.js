@@ -12,7 +12,7 @@ export async function regbid(message, args, client) {
                 new ButtonBuilder()
                     .setLabel('SignIn')
                     .setStyle(ButtonStyle.Link)
-                    .setURL("https://discord.com/api/oauth2/authorize?client_id=1038735617057632266&redirect_uri=https%3A%2F%2Fdxflwfledezyinanacmg.supabase.co%2Fauth%2Fv1%2Fcallback&response_type=code&scope=identify%20email")
+                    .setURL("https://discord.com/api/oauth2/authorize?client_id=1038735617057632266&redirect_uri=https%3A%2F%2Fcelestebot.ga%2Fredirect&response_type=code&scope=identify%20email")
             );
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     var msg = channel.send({ components: [button] })
