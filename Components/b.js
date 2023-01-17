@@ -13,7 +13,7 @@ export async function b(message, args, client) {
         .from("Discord minigame")
         .select("email")
         .eq("dis_id", message.author.id)
-        if(user.email!==null && get_globals("bidderId") != message.author.id){
+        if(user[0].email!==null && get_globals("bidderId") != message.author.id){
             if (args[0] < 0 || args[0] == null || args[0] <= get_globals('bidAmt')){
                 var errEmbed = new EmbedBuilder()
                 .setColor(0xFF0000)
