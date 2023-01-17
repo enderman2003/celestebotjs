@@ -9,8 +9,10 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function lb(message, client) {
-  const { data: { user } } = await supabase.auth.getUser()
-  console.log(user)
+  const { user, err } = await supabase
+        .from("Discord minigame")
+        .select("email")
+        .eq("dis_id", message.author.id)
   if (user !== null) {
     const rndInt = randomIntFromInterval(50, 350)
     const { data, error } = await supabase
