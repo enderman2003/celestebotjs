@@ -13,7 +13,7 @@ export async function dc(message, client) {
         .from("Discord minigame")
         .select("email")
         .eq("dis_id", message.author.id)
-  if(user!==null) { 
+  if(user.email!==null) { 
     const rndInt = randomIntFromInterval(500, 1500)
     const { data, error } = await supabase
       .from('Discord minigame')
