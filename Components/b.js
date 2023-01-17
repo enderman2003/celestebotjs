@@ -9,11 +9,7 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 export async function b(message, args, client) {
     if (get_globals("auctionProcess") === 'true') {
-        const { user, err } = await supabase
-        .from("Discord minigame")
-        .select("email")
-        .eq("dis_id", message.author.id)
-        if(user[0].email!==null && get_globals("bidderId") != message.author.id){
+        if(get_globals("bidderId") != message.author.id){
             if (args[0] < 0 || args[0] == null || args[0] <= get_globals('bidAmt')){
                 var errEmbed = new EmbedBuilder()
                 .setColor(0xFF0000)
