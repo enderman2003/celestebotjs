@@ -9,11 +9,6 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function lb(message, client) {
-  const { user, err } = await supabase
-        .from("Discord minigame")
-        .select("email")
-        .eq("dis_id", message.author.id.toString())
-  if (user[0].email !== null) {
     const rndInt = randomIntFromInterval(50, 350)
     const { data, error } = await supabase
       .from('Discord minigame')
@@ -35,17 +30,6 @@ export async function lb(message, client) {
 
     var channel = await client.channels.fetch(WAIFU_CHANNEL)
     channel.send({ embeds: [wonEmbed] })
-  }
-  else{
-    var lbEmbed = new EmbedBuilder()
-          .setColor(0xFF0000)
-          .setTitle('User not Found')
-          .setDescription(`User not Registered`)
-          .setFooter({ text: message.author.username });
-
-    var channel = await client.channels.fetch(WAIFU_CHANNEL)
-    channel.send({ embeds: [lbEmbed] })
-  }
 }
 
 function randomIntFromInterval(min, max) { // min and max included 
