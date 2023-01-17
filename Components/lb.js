@@ -12,8 +12,8 @@ export async function lb(message, client) {
   const { user, err } = await supabase
         .from("Discord minigame")
         .select("email")
-        .eq("dis_id", message.author.id)
-  if (user.email !== null) {
+        .eq("dis_id", message.author.id.toString())
+  if (user[0].email !== null) {
     const rndInt = randomIntFromInterval(50, 350)
     const { data, error } = await supabase
       .from('Discord minigame')
