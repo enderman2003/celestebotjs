@@ -12,7 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.2.2",
-    "discord.js": "^14.7.1"
+    "discord.js": "^14.7.1",
+    "@acegoal07/discordjs-pagination": "^1.5.0"
   },
   "devDependencies": {
     "@architect/sandbox": "^5.4.1",
