@@ -58,16 +58,21 @@ client.on('messageCreate', async msg => {
             }
 	    break;
 	case "v":
-            const {data, error} = await supabase
+            const { user, err } = await supabase
             .from("Discord minigame")
-            .select("claimed_waifus")
-            .eq("dis_id", msg.author.id)
-            console.log(data)
-            var msgEmbed = []
-            for(let i=0; i<=data[0].claimed_waifus.waifus.length; i++) {
-              msgEmbed.push(new EmbedBuilder().setTitle("Claimed Assets").setImage("https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/" + data[0].claimed_waifus.waifus[i]).setColor(0x0099FF))
+            .select("email")
+            .eq("dis_id", message.author.id)
+            if(user.email !== null){
+              const {data, error} = await supabase
+              .from("Discord minigame")
+              .select("claimed_waifus")
+              .eq("dis_id", msg.author.id)
+              var msgEmbed = []
+              for(let i=0; i<=data[0].claimed_waifus.waifus.length; i++) {
+                msgEmbed.push(new EmbedBuilder().setTitle("Claimed Assets").setImage("https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/" + data[0].claimed_waifus.waifus[i]).setColor(0x0099FF))
+              }
+              v(msg, msgEmbed)
             }
-            v(msg, msgEmbed)
             break;
 	case 'lb':
  	    if (hourlycd.has(msg.author.id)) {
