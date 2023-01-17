@@ -34,13 +34,17 @@ client.on("ready", () => {
 
 client.on('messageCreate', async msg => {
     if(!msg.content.startsWith(Prefix) || msg.author.bot) return;
-
+    const {user,err} = await supabase.from("Discord minigame").select("*").eq("dis_id", msg.author.id)
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
+    if (command === "regbid") { regbid(msg, args, client) }
+    if (command !== "regbid" && user[0].email === null)
+    {
+      msg.reply("You are not registered. Register with C!regbid") 
+      return
+    }
+    
     switch (command) {
-        case "regbid":
-            regbid(msg, args, client)
-            break;
         case "b":
             bid_timer_end()
 	    auction_timer_end()
