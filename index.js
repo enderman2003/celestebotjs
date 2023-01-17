@@ -62,6 +62,7 @@ client.on('messageCreate', async msg => {
             .from("Discord minigame")
             .select("email")
             .eq("dis_id", msg.author.id)
+            console.log(user)
             if(user[0].email !== null){
               const {data, error} = await supabase
               .from("Discord minigame")
