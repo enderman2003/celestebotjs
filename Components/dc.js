@@ -9,7 +9,7 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 
 
 export async function dc(message, client) {
-    const rndInt = randomIntFromInterval(500, 1500)
+    const rndInt = randomIntFromInterval(50, 150)
     const { data, error } = await supabase
       .from('Discord minigame')
       .select('*')
