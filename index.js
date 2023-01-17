@@ -34,11 +34,11 @@ client.on("ready", () => {
 
 client.on('messageCreate', async msg => {
     if(!msg.content.startsWith(Prefix) || msg.author.bot) return;
-    const {user,err} = await supabase.from("Discord minigame").select("*").eq("dis_id", msg.author.id)
+    const { data, error } = await supabase.from("Discord minigame").select("*").eq("dis_id", msg.author.id)
     const args = msg.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     if (command === "regbid") { regbid(msg, args, client) }
-    if (command !== "regbid" && user[0].email === null)
+    if (command !== "regbid" && data[0].email === null)
     {
       msg.reply("You are not registered. Register with C!regbid") 
       return
@@ -62,10 +62,6 @@ client.on('messageCreate', async msg => {
             }
 	    break;
 	case "v":
-            const { data, error} = await supabase
-            .from("Discord minigame")
-            .select("*")
-            .eq("dis_id", msg.author.id)
             if(data[0].email !== null){
               var msgEmbed = []
               for(let i=0; i<=data[0].claimed_waifus.waifus.length; i++) {
