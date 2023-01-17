@@ -11,7 +11,7 @@ export async function bal(message, client) {
         .from("Discord minigame")
         .select("email")
         .eq("dis_id", message.author.id)
-  if (user.email !== null) {
+  if (user[0].email !== null) {
     const { data, error } = await supabase
       .from('Discord minigame')
       .select('*')
