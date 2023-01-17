@@ -13,5 +13,6 @@ export async function v(message, embeds){
          .setStyle("Secondary")
          .setCustomId(`2`)
    ])
+   .setTimeout(30000)
    .paginate()
 }
