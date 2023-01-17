@@ -8,7 +8,10 @@ const WAIFU_CHANNEL = process.env.WAIFU_CHANNEL
 var j = 0
 
 export async function ha(message, client) {
-  const user = supabase.auth.user
+  const { user, err } = await supabase
+        .from("Discord minigame")
+        .select("email")
+        .eq("dis_id", message.author.id)
   if(user!==null && get_globals('auctionProcess') == 'false') { 
     set_globals('auctionProcess', 'true')
     const { dat, err} = await supabase
