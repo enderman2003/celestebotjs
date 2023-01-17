@@ -61,7 +61,7 @@ client.on('messageCreate', async msg => {
             const { user, err } = await supabase
             .from("Discord minigame")
             .select("email")
-            .eq("dis_id", message.author.id)
+            .eq("dis_id", msg.author.id)
             if(user.email !== null){
               const {data, error} = await supabase
               .from("Discord minigame")
