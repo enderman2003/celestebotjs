@@ -1,5 +1,5 @@
 import { Pagination } from "@acegoal07/discordjs-pagination";
-
+import { ButtonBuilder } from 'discord.js';
 export async function v(message, embeds){
   new Pagination().setPortal(message)
    .setPageList(embeds)
