@@ -58,16 +58,11 @@ client.on('messageCreate', async msg => {
             }
 	    break;
 	case "v":
-            const { user, err } = await supabase
+            const { data, error} = await supabase
             .from("Discord minigame")
             .select("*")
-            .eq("dis_id", msg.author.id.toString())
-            console.log(user)
-            if(user[0].email !== null){
-              const {data, error} = await supabase
-              .from("Discord minigame")
-              .select("claimed_waifus")
-              .eq("dis_id", msg.author.id)
+            .eq("dis_id", msg.author.id)
+            if(data[0].email !== null){
               var msgEmbed = []
               for(let i=0; i<=data[0].claimed_waifus.waifus.length; i++) {
                 msgEmbed.push(new EmbedBuilder().setTitle("Claimed Assets").setImage("https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/" + data[0].claimed_waifus.waifus[i]).setColor(0x0099FF))
