@@ -64,7 +64,7 @@ client.on('messageCreate', async msg => {
 	case "v":
             if(data[0].email !== null){
               var msgEmbed = []
-              for(let i=0; i<=data[0].claimed_waifus.waifus.length; i++) {
+              for(let i=0; i<data[0].claimed_waifus.waifus.length; i++) {
                 msgEmbed.push(new EmbedBuilder().setTitle("Claimed Assets").setImage("https://dxflwfledezyinanacmg.supabase.co/storage/v1/object/public/animenft/" + data[0].claimed_waifus.waifus[i]).setColor(0x0099FF))
               }
               v(msg, msgEmbed)
